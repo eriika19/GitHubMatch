@@ -26,16 +26,16 @@ class Nav extends Component {
   render() {
     const data = [
       { section: "Inicio", route: "/" },
-      { section: "Buscar usuarios", route: "/users" },
-      { section: "Buscar repositorios", route: "/repositoryes" }
+      { section: "Usuarios", route: "/users" },
+      { section: "Repositorios", route: "/repositories" }
     ];
 
     return (
       <nav className="navbar is-fixed-top">
         <div className="container">
           <div className="navbar-brand">
-            <figure className="image is-128x128">
-              <img src="/assets/runa-logo.png" />
+            <figure className="image is-128x128 nav-logo">
+              <img src="/assets/logo.png" />
             </figure>
             <span
               className={

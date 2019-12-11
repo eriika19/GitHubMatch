@@ -1,4 +1,4 @@
-import "isomorphic-unfetch";
+/* import "isomorphic-unfetch";
 
 import { API_KEY } from "./config";
 
@@ -24,4 +24,4 @@ export const getUpcomingMovies = async () =>
   );
 
 export const getImageSrc = (path, size) =>
-  `${IMAGE_BASE_URI}/${size ? `w${size}` : "original"}${path}`;
+  `${IMAGE_BASE_URI}/${size ? `w${size}` : "original"}${path}`; */
