@@ -4,12 +4,12 @@ const errorPage = ({ statusCode }) => (
       <span>
         {statusCode ? (
           <span>
-            ¡Oh, no! Hay un erro en el servidor: <b> {statusCode}.</b>
+            ¡Oh, no! Ocurrió un error en el servidor: <b> {statusCode}.</b>
           </span>
         ) : (
-          "¡Oh, no! Se ha producido un error al cargar la página."
+          "¡Oh, no! Se ha producido un error al cargar la página en el dispositivo."
         )}
-        Por favor intenta de nuevo.
+        Por favor intenta de nuevo posteriormente.
       </span>
     </p>
   </section>

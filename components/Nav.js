@@ -35,7 +35,7 @@ class Nav extends Component {
         <div className="container">
           <div className="navbar-brand">
             <figure className="image is-128x128 nav-logo">
-              <img src="/assets/logo.png" />
+              <img src="/assets/logo.png" alt="logo"/>
             </figure>
             <span
               className={
