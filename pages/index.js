@@ -41,7 +41,6 @@ class Home extends Component {
         <Layout>
           <Fade right>
             <section id="home" className={load ? "section" : "section hide"}>
-              <div className="hero-body">
                 <div className="container">
                   <h2 className="title is-2 is-spaced">¡Hola!</h2>
                   <h5 className="subtitle is-5">
@@ -52,7 +51,6 @@ class Home extends Component {
                     <p>¿Qué deseas buscar hoy?</p>
                   </div>
                 </div>
-              </div>
             </section>
           </Fade>
         </Layout>
