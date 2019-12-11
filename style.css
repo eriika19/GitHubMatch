@@ -1,0 +1,94 @@
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.view {
+  height: 100vh;
+}
+
+.hide {
+  display: none;
+}
+
+.nice-hide {
+  transition: all 5s ease-out;
+  display: none;
+}
+
+html.has-navbar-fixed-top {
+  padding-top: 8rem;
+}
+
+.has-padding-top {
+  padding-top: 8.2rem;
+}
+
+.splash {
+  padding-top: 40vh;
+}
+
+.logo img {
+  width: 8rem;
+  height: auto;
+}
+
+.is-purple {
+  color: #8378f4;
+}
+
+.is-bg-purple {
+  background-color: #8378f4;
+}
+
+.is-dark-blue {
+  color: #777;
+}
+
+.is-nice-blue {
+  color: #b3d4fc;
+}
+
+.is-blue {
+  color: #5b7bb2;
+}
+
+.is-bg-blue {
+  background-color: #5b7bb2;
+  color: #fff;
+}
+
+.is-bg-blue {
+  background-color: #5b7bb2;
+  color: #fff;
+}
+
+.image img {
+  margin-top: 0.9rem;
+  margin-left: 0.9rem;
+}
+
+span {
+  color: #7a6ff0;
+}
+
+.button {
+  border-width: 0.12rem;
+}
+
+@media (max-width: 1023px) {
+  .navbar-menu {
+    height: 100vh;
+  }
+
+  a.navbar-item {
+    color: #7a6ff0;
+  }
+
+  a.navbar-item {
+    border-bottom: 1px dashed #7a6ff0 !important;
+    padding: 1.2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    color: #352c60;
+  }
+}
