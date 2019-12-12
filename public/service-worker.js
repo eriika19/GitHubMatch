@@ -1,47 +1,47 @@
 self.__precacheManifest = [
   {
-    "url": "/_next/static/chunks/commons.e7945ee73e8abebbc3de.js",
-    "revision": "1a958792060364bc3938"
+    "url": "/_next/static/chunks/commons.ec62b0cb84cfd418c85a.js",
+    "revision": "44dce71066a5de318f58"
   },
   {
-    "url": "/_next/static/chunks/styles.cd24f167ece00fa47366.js",
-    "revision": "b4561d400fe0b4f18110"
+    "url": "/_next/static/chunks/styles.24ddec3ee69fb1ab5ec0.js",
+    "revision": "dbb0abde8cb82fda1246"
   },
   {
-    "url": "/_next/static/css/styles.e0e0ed85.chunk.css",
-    "revision": "b4561d400fe0b4f18110"
+    "url": "/_next/static/css/styles.60d64750.chunk.css",
+    "revision": "dbb0abde8cb82fda1246"
   },
   {
-    "url": "/_next/static/runtime/main-98c4af738c618631a8b3.js",
-    "revision": "af2b564201d53833d302"
+    "url": "/_next/static/runtime/main-36914d9c5375bc6f17a6.js",
+    "revision": "e97b99f1937a8f3f24bf"
   },
   {
-    "url": "/_next/static/runtime/polyfills-a591b2980a0968e30eae.js",
-    "revision": "144cce4cb848103d568c"
+    "url": "/_next/static/runtime/polyfills-f5af81b00d12d923ec0f.js",
+    "revision": "c133b2cadab912d169ad"
   },
   {
-    "url": "/_next/static/runtime/webpack-9369c5c69dbf6d4912cb.js",
-    "revision": "339869abd27a67efd9af"
+    "url": "/_next/static/runtime/webpack-4b444dab214c6491079c.js",
+    "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\VEqxcFg-3HFDmIMne31rD\\pages\\_app.js",
-    "revision": "c06d6484ec8f82ed8e99"
+    "url": "/_next/static\\p0EcaMJvHESGFI7_MDrm8\\pages\\_app.js",
+    "revision": "623d1abf8e8a7f863605"
   },
   {
-    "url": "/_next/static\\VEqxcFg-3HFDmIMne31rD\\pages\\_error.js",
-    "revision": "e87fa688ffacf63789b8"
+    "url": "/_next/static\\p0EcaMJvHESGFI7_MDrm8\\pages\\_error.js",
+    "revision": "753107b57e849b4e8cbf"
   },
   {
-    "url": "/_next/static\\VEqxcFg-3HFDmIMne31rD\\pages\\index.js",
-    "revision": "b7431dbab16ef757f242"
+    "url": "/_next/static\\p0EcaMJvHESGFI7_MDrm8\\pages\\index.js",
+    "revision": "614d848b4b424adc950a"
   },
   {
-    "url": "/_next/static\\VEqxcFg-3HFDmIMne31rD\\pages\\repositories.js",
-    "revision": "8701b313c9a321a926d6"
+    "url": "/_next/static\\p0EcaMJvHESGFI7_MDrm8\\pages\\repositories.js",
+    "revision": "1f61982f0b4f7e4c2c7e"
   },
   {
-    "url": "/_next/static\\VEqxcFg-3HFDmIMne31rD\\pages\\users.js",
-    "revision": "b5c315756aa51a4b4724"
+    "url": "/_next/static\\p0EcaMJvHESGFI7_MDrm8\\pages\\users.js",
+    "revision": "623aa8f6be4f35dbae85"
   }
 ];
 

@@ -67,10 +67,3 @@ const GitHubMatch = {
 };
 
 export default GitHubMatch;
-
-/*   byUser: (searchValue) => {
-  return axios.get("https://api.github.com/users/" + );
-},
-byRepo: (searchValue) => {
-  return axios.get("https://api.github.com/users/" + username + "/repos");
-} */

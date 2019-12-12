@@ -1,6 +1,6 @@
 import { Component } from "react";
-import Router from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 import Fade from "react-reveal/Fade";
 
 import Layout from "../components/Layout";
@@ -8,25 +8,15 @@ import Splash from "../components/Splash";
 
 class Home extends Component {
   state = {
-    load: "",
+    load: ""
   };
 
   componentDidMount() {
-/*     Router.onRouteChangeStart = () => {
-      this.setState({ loading: true });
-    };
-    Router.onRouteChangeComplete = () => {
-      this.setState({ loading: false });
-    };
-    Router.onRouteChangeError = () => {
-      this.setState({ loading: false });
-    }; */
-
     window.addEventListener("load", this.handleLoad);
     window.addEventListener("scroll", this.changeState, true);
 
     this.setState({
-      load: false,
+      load: false
     });
   }
 
@@ -58,8 +48,16 @@ class Home extends Component {
                 Bienvenid@ al mejor buscador de usuarios y repositorios dentro
                 de GitHub.
               </h5>
-              <div className="content">
-                <p>¿Qué deseas buscar hoy?</p>
+              <div className="content has-text-centered has-lg-margin-top">
+                <p className="is-size-5"> ¿Qué match deseas buscar hoy?</p>
+                <div className="buttons is-centered">
+                  <button className="button is-medium is-rounded is-info is-light">
+                    <Link href="/users">Usuario GitHub</Link>
+                  </button>
+                  <button className="button is-medium is-rounded is-success is-light">
+                    <Link href="/repositories">Repositorio GitHub</Link>
+                  </button>
+                </div>
               </div>
             </div>
           </section>

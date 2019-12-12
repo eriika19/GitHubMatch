@@ -97,7 +97,7 @@ class UsersPage extends Component {
     return (
       <div>
         <Head>
-          <title>Luuna | GitHub Users Match</title>
+          <title>Luuna | GitHub Match Users</title>
         </Head>
         <Layout loading={loading}>
           <Fade right>
@@ -123,7 +123,7 @@ class UsersPage extends Component {
                   </span>
                 </p>
               </form>
-              <section className="container">
+              <section id="results">
                 {matchUsers === null ? (
                   ""
                 ) : matchUsers === false ? (
@@ -131,7 +131,7 @@ class UsersPage extends Component {
                 ) : (
                   `Se encontró ${matchUsers.length} coincidencia(s)`
                 )}
-                <div id="results" className="container card">
+                <div id="results" className="container has-margin-top">
                   {Array.isArray(matchUsers)
                     ? matchUsers.map((props, i) => (
                         <UserCard {...props} key={i} />

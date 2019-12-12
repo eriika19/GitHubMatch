@@ -66,6 +66,10 @@ const MyApp = ({ Component, pageProps }) => {
             color: #b3d4fc;
           }
 
+          .is-nice-blue:hover {
+            color: #5b7bb2;
+          }
+
           .is-bgnice-blue {
             background-color: #b3d4fc;
           }
@@ -109,12 +113,20 @@ const MyApp = ({ Component, pageProps }) => {
             border-width: 0.1rem;
           }
 
-          .container.card {
+          .has-margin-top {
             margin-top: 2.5rem;
+          }
+          .has-lg-margin-top {
+            margin-top: 4.5rem;
           }
 
           .card {
-            border-radius: 8px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+          }
+
+          .buttons {
+            margin-top: 2rem;
           }
 
           .button {
@@ -132,6 +144,10 @@ const MyApp = ({ Component, pageProps }) => {
               margin-left: 1rem;
               margin-right: 1rem;
               color: #777;
+            }
+
+            .section {
+              padding: 3rem 0rem;
             }
           }
         `}
