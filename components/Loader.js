@@ -3,8 +3,8 @@ const Loader = ({ loading }) => {
     <div
       className={
         loading
-          ? "pageloader is-nice-blue is-active"
-          : "is-nice-blue pageloader"
+          ? "pageloader is-bgnice-blue is-active"
+          : "is-bgnice-blue pageloader"
       }
     >
       <span className="title">Cargando...</span>

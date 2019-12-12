@@ -34,9 +34,11 @@ class Nav extends Component {
       <nav className="navbar is-fixed-top">
         <div className="container">
           <div className="navbar-brand">
-            <figure className="image is-128x128 nav-logo">
-              <img src="/assets/logo.png" alt="logo"/>
-            </figure>
+            <Link href="/">
+              <figure className="image is-128x128 nav-logo">
+                <img src="/assets/logo.png" alt="logo" />
+              </figure>
+            </Link>
             <span
               className={
                 this.state.navMenuOpen

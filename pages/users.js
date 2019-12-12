@@ -36,8 +36,9 @@ class UsersPage extends Component {
                 <h2 className="title is-2 is-spaced">¡Hola!</h2>
                 <h5 className="subtitle is-5">
                   Bienvenid@ al mejor buscador de usuarios y repositorios dentro
-                  de GitHub.
+                                de GitHub.
                 </h5>
+                            
                 <div className="content">
                   <p>¿Qué deseas buscar hoy?</p>
                 </div>

@@ -8,12 +8,11 @@ import Splash from "../components/Splash";
 
 class Home extends Component {
   state = {
-    loading: "",
-    load: ""
+    load: "",
   };
 
   componentDidMount() {
-    Router.onRouteChangeStart = () => {
+/*     Router.onRouteChangeStart = () => {
       this.setState({ loading: true });
     };
     Router.onRouteChangeComplete = () => {
@@ -21,13 +20,12 @@ class Home extends Component {
     };
     Router.onRouteChangeError = () => {
       this.setState({ loading: false });
-    };
+    }; */
 
     window.addEventListener("load", this.handleLoad);
     window.addEventListener("scroll", this.changeState, true);
 
     this.setState({
-      loading: false,
       load: false,
     });
   }

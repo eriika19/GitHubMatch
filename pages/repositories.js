@@ -2,12 +2,14 @@ import { Component } from "react";
 import Router from "next/router";
 import Head from "next/head";
 import Fade from "react-reveal/Fade";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Layout from "../components/Layout";
 
 class RepostitoriesPage extends Component {
   state = {
-    loading: false
+    loading: false,
+    searchValue: ""
   };
 
   componentDidMount() {
@@ -22,26 +24,46 @@ class RepostitoriesPage extends Component {
     };
   }
 
+  handleChange = e => {
+    if (e.target.value.length > 0) {
+      this.setState({
+        searchValue: e.target.value
+      });
+    }
+  };
+
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
+      alert("Se ha enviado un valor de búsqueda " + this.state.searchValue);
+      e.preventDefault();
+    }
+  };
+
   render() {
-    const { loading } = this.state;
+    const { loading, searchValue } = this.state;
     return (
       <div>
         <Head>
           <title>Luuna | GitHub Repositories Match</title>
         </Head>
-        <Layout loading = {loading}>
+        <Layout loading={loading}>
           <Fade right>
             <section id="repostitories" className="section">
-              <div className="container">
-                <h2 className="title is-2 is-spaced">¡Hola!</h2>
-                <h5 className="subtitle is-5">
-                  Bienvenid@ al mejor buscador de usuarios y repositorios dentro
-                  de GitHub.
-                </h5>
-                <div className="content">
-                  <p>¿Qué deseas buscar hoy?</p>
-                </div>
-              </div>
+              <form className="field">
+                <p className="control has-icons-left is-expanded">
+                  <input
+                    className="input is-info is-rounded"
+                    type="text"
+                    placeholder="Buscar repositorio GitHub.."
+                    onKeyPress={this.handleKeyPress}
+                    onChange={this.handleChange}
+                    value={searchValue}
+                  />
+                  <span className="icon is-small is-left">
+                    <FontAwesomeIcon className="fas" icon="search" />
+                  </span>
+                </p>
+              </form>
             </section>
           </Fade>
         </Layout>
