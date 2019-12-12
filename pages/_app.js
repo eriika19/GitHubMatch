@@ -109,6 +109,14 @@ const MyApp = ({ Component, pageProps }) => {
             border-width: 0.1rem;
           }
 
+          .container.card {
+            margin-top: 2.5rem;
+          }
+
+          .card {
+            border-radius: 8px;
+          }
+
           .button {
             border-width: 0.12rem;
           }
