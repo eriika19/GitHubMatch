@@ -65,12 +65,16 @@ class Home extends Component {
               <div className="content has-text-centered has-lg-margin-top">
                 <p className="is-size-5"> ¿Qué match deseas buscar hoy?</p>
                 <div className="buttons is-centered">
-                  <button className="button is-medium is-rounded is-info is-light">
-                    <Link href="/users"><a>Usuario GitHub</a></Link>
-                  </button>
-                  <button className="button is-medium is-rounded is-success is-light">
-                    <Link href="/repositories"><a>Repositorio GitHub</a></Link>
-                  </button>
+                  <Link href="/users">
+                    <button className="button is-medium is-rounded is-info is-light">
+                      Usuario GitHub
+                    </button>
+                  </Link>
+                  <Link href="/repositories">
+                    <button className="button is-medium is-rounded is-success is-light">
+                      Repositorio GitHub
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
