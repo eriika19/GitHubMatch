@@ -56,12 +56,6 @@ const GitHubMatch = {
       `${SEARCH_BASE_URI}/repositories?q=${searchValue}`
     );
     return response;
-  },
-  getRepo: async searchValue => {
-    const response = await axiosWithErrorHandling(
-      `${REPOS_BASE_URI}/${searchValue}`
-    );
-    return response;
   }
 };
 

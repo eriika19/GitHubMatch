@@ -28,30 +28,29 @@ class UsersPage extends Component {
       this.setState({ loading: false });
     };
 
+    this.cleanMatchedUsers();
+  }
+
+  cleanMatchedUsers = () => {
     this.setState({
       matchUsers: null
     });
-  }
+  };
 
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.setState({
-        matchUsers: null
-      });
+      this.cleanMatchedUsers();
     }
     this.setState({
       searchValue: e.target.value
     });
   };
 
-  getData = async searchValue => {
+  getData = async () => {
+    const { searchValue } = this.state;
     const response = await GitHubMatch.byUser(searchValue);
-    if (response.data.total_count > 0) {
-      const data = response.data;
-      return data;
-    } else {
-      return false;
-    }
+    const { data } = response;
+    return data;
   };
 
   handleData = async data => {
@@ -74,20 +73,15 @@ class UsersPage extends Component {
         const data = await this.getData(searchValue);
         if (data) {
           const matchUsers = await this.handleData(data);
-
           this.setState({
             matchUsers: matchUsers
           });
-        } else {
-          this.setState({
-            matchUsers: false
-          });
         }
-      }
 
-      this.setState({
-        searching: false
-      });
+        this.setState({
+          searching: false
+        });
+      }
     }
   };
 
@@ -126,25 +120,25 @@ class UsersPage extends Component {
               <section id="results">
                 {matchUsers === null ? (
                   ""
-                ) : matchUsers === false ? (
+                ) : matchUsers.size === 0 ? (
                   <p className="is-danger">No se encontraron coincidencias</p>
                 ) : (
                   `Se encontró ${matchUsers.length} coincidencia(s)`
                 )}
                 <div id="results" className="container has-margin-top">
-                  {Array.isArray(matchUsers)
-                    ? matchUsers.map((props, i) => (
+                    {Array.isArray(matchUsers)
+                      ? matchUsers.map((props, i) => (
                         <UserCard {...props} key={i} />
                       ))
-                    : ``}
-                </div>
+                      : ``}
+                  </div>
+                </section>
               </section>
-            </section>
-          </Fade>
-        </Layout>
-      </div>
-    );
-  }
+            </Fade>
+          </Layout>
+        </div>
+      );
+    }
 }
 
 export default UsersPage;
