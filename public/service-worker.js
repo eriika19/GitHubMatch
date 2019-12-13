@@ -5,11 +5,11 @@ self.__precacheManifest = [
   },
   {
     "url": "/_next/static/chunks/styles.24ddec3ee69fb1ab5ec0.js",
-    "revision": "68debc16c05b74a2dfd6"
+    "revision": "244638a08365851ca24b"
   },
   {
-    "url": "/_next/static/css/styles.8ed541d7.chunk.css",
-    "revision": "68debc16c05b74a2dfd6"
+    "url": "/_next/static/css/styles.8bb69a5b.chunk.css",
+    "revision": "244638a08365851ca24b"
   },
   {
     "url": "/_next/static/runtime/main-36914d9c5375bc6f17a6.js",
@@ -24,24 +24,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\qHCMniH5SoAp50fLQDybs\\pages\\_app.js",
-    "revision": "b2d18e254a3a50d5e440"
+    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\_app.js",
+    "revision": "f8ee89d1cf0fb76db27f"
   },
   {
-    "url": "/_next/static\\qHCMniH5SoAp50fLQDybs\\pages\\_error.js",
-    "revision": "1842314a3d7d2fd6f28c"
+    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\_error.js",
+    "revision": "aec959c2008962aab095"
   },
   {
-    "url": "/_next/static\\qHCMniH5SoAp50fLQDybs\\pages\\index.js",
-    "revision": "6af2f4b6bceadcd4f093"
+    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\index.js",
+    "revision": "8081738034431bf02115"
   },
   {
-    "url": "/_next/static\\qHCMniH5SoAp50fLQDybs\\pages\\repositories.js",
-    "revision": "58572fe88affd3b4c943"
+    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\repositories.js",
+    "revision": "bfe76a826fdfec4244e0"
   },
   {
-    "url": "/_next/static\\qHCMniH5SoAp50fLQDybs\\pages\\users.js",
-    "revision": "f2bd309f7c18dbc2e5f7"
+    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\users.js",
+    "revision": "29d9a8154a37d19098a2"
   }
 ];
 
