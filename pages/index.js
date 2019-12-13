@@ -10,7 +10,7 @@ import Splash from "../components/Splash";
 class Home extends Component {
   state = {
     loading: false,
-    load: ""
+    load: false
   };
 
   componentDidMount() {
@@ -26,13 +26,15 @@ class Home extends Component {
 
     window.addEventListener("load", this.handleLoad);
     window.addEventListener("scroll", this.changeState, true);
+  }
 
-    this.setState({
-      load: false
-    });
+  componentWillUnmount() {
+    window.removeEventListener("load", this.handleLoad);
+    window.removeEventListener("scroll", this.changeState);
   }
 
   handleLoad = () => {
+    // Manejo de Splash con logo de Luuna
     setTimeout(this.changeState, 700);
   };
 
@@ -64,10 +66,10 @@ class Home extends Component {
                 <p className="is-size-5"> ¿Qué match deseas buscar hoy?</p>
                 <div className="buttons is-centered">
                   <button className="button is-medium is-rounded is-info is-light">
-                    <Link href="/users">Usuario GitHub</Link>
+                    <Link href="/users"><a>Usuario GitHub</a></Link>
                   </button>
                   <button className="button is-medium is-rounded is-success is-light">
-                    <Link href="/repositories">Repositorio GitHub</Link>
+                    <Link href="/repositories"><a>Repositorio GitHub</a></Link>
                   </button>
                 </div>
               </div>

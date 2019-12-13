@@ -1,12 +1,11 @@
 const getDaysAgo = date => {
-  const updateAtDate = new Date(date);
+  const updateAt = new Date(date);
   const currentDate = new Date();
-
   const oneDay = 1000 * 60 * 60 * 24;
 
-  const timeLapse = currentDate.getTime() - updateAtDate.getTime(); // tiempo en milisegundos
-  const daysPassed = Math.round(timeLapse / oneDay);
-  return daysPassed;
+  const timeLapse = currentDate.getTime() - updateAt.getTime(); // tiempo en milisegundos
+  const daysAgo = Math.round(timeLapse / oneDay);
+  return daysAgo;
 };
 
 const RepoCard = props => {
@@ -20,9 +19,7 @@ const RepoCard = props => {
     updated_at
   } = props;
 
-  const date = new Date(updated_at);
-  const updateDate = date.toString();
-  const daysPassed = getDaysAgo(updated_at);
+  const daysAgo = getDaysAgo(updated_at);
 
   return (
     <div className="card">
@@ -46,8 +43,7 @@ const RepoCard = props => {
             <p>{description ? description : <br />}</p>
             <small>
               <time
-                dateTime={updateDate}
-              >{`Actualizado hace: ${daysPassed} día(s)`}</time>
+              >{`Actualizado hace: ${daysAgo} día(s)`}</time>
             </small>
             <br />
             <small>

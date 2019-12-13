@@ -9,7 +9,7 @@ import GitHubMatch from "../utils/apiCalls";
 import Layout from "../components/Layout";
 import RepoCard from "../components/RepoCard";
 
-class ReposPage extends Component {
+class RepositoriesPage extends Component {
   state = {
     loading: false,
     searching: false,
@@ -27,71 +27,55 @@ class ReposPage extends Component {
     Router.onRouteChangeError = () => {
       this.setState({ loading: false });
     };
-
-    this.setState({
-      matchRepos: null
-    });
   }
+
+  cleanMatchedRepos = () => {
+    this.setState({
+      matchRepos: ""
+    });
+  };
+
+  toggleSearching = () => {
+    this.setState({
+      searching: !this.state.searching
+    });
+  };
 
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.setState({
-        matchRepos: null
-      });
+      this.cleanMatchedRepos();
     }
     this.setState({
       searchValue: e.target.value
     });
   };
 
-  getData = async searchValue => {
+  getData = async () => {
+    const { searchValue } = this.state;
     const response = await GitHubMatch.byRepo(searchValue);
-    if (response.data.total_count > 0) {
-      const data = response.data;
-      return data;
-    } else {
-      return false;
-    }
+    const { data } = response;
+    return data;
   };
 
-  /*   handleData = async data => {
-    const arrPromises = data.items.map(async item => {
-      const repoData = await GitHubMatch.getRepo();
-      return repoData;
-    });
-    return Promise.all(arrPromises);
-  }; */
+  handleSubmit = async e => {
+    //Init searching state
+    this.toggleSearching();
+    e.preventDefault();
 
-  handleKeyPress = async e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+    const { searchValue } = this.state;
+
+    //Verifiy valid searchValue
+    if (searchValue.length > 0) {
+      //get searchValue results
+      const data = await this.getData();
+      //handle results to get matchUsers array
+      const matchRepos = data.items;
       this.setState({
-        searching: true
-      });
-      const { searchValue } = this.state;
-
-      if (searchValue.length > 0) {
-        const data = await this.getData(searchValue);
-        if (data) {
-          //const matchRepos = await this.handleData(data);
-          const matchRepos = data.items;
-    //      console.log(matchRepos);
-          
-
-          this.setState({
-            matchRepos: matchRepos
-          });
-        } else {
-          this.setState({
-            matchRepos: false
-          });
-        }
-      }
-
-      this.setState({
-        searching: false
+        matchRepos: matchRepos
       });
     }
+    //Finalize searching state
+    this.toggleSearching();
   };
 
   render() {
@@ -105,7 +89,7 @@ class ReposPage extends Component {
         <Layout loading={loading}>
           <Fade right>
             <section id="repositories" className="section">
-              <form className="field">
+              <form className="field" onSubmit={this.handleSubmit}>
                 <p
                   className={
                     searching
@@ -117,7 +101,6 @@ class ReposPage extends Component {
                     className="input is-info is-rounded"
                     type="text"
                     placeholder="Buscar repositorio GitHub.."
-                    onKeyPress={this.handleKeyPress}
                     onChange={this.handleChange}
                     value={searchValue}
                   />
@@ -127,15 +110,11 @@ class ReposPage extends Component {
                 </p>
               </form>
               <section id="results">
-                {matchRepos === null ? (
-                  ""
-                ) : matchRepos === false ? (
-                  <p className="is-danger">No se encontraron coincidencias</p>
-                ) : (
-                  `Se encontró ${matchRepos.length} coincidencia(s)`
-                )}
+                {matchRepos === ""
+                  ? ``
+                  : `Se encontró ${matchRepos.length} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
-                  {Array.isArray(matchRepos)
+                  {matchRepos.length > 0
                     ? matchRepos.map((props, i) => (
                         <RepoCard {...props} key={i} />
                       ))
@@ -150,4 +129,4 @@ class ReposPage extends Component {
   }
 }
 
-export default ReposPage;
+export default RepositoriesPage;

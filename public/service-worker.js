@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "url": "/_next/static/chunks/commons.ec62b0cb84cfd418c85a.js",
-    "revision": "44dce71066a5de318f58"
+    "url": "/_next/static/chunks/commons.3b63f2b70d9e592c75e1.js",
+    "revision": "deca1f203c1ffd9349b6"
   },
   {
     "url": "/_next/static/chunks/styles.24ddec3ee69fb1ab5ec0.js",
@@ -24,24 +24,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\_app.js",
-    "revision": "f8ee89d1cf0fb76db27f"
+    "url": "/_next/static\\-MN1vOHl4YXpzJtEsIxGJ\\pages\\_app.js",
+    "revision": "5f004acfe05c4bdf5a76"
   },
   {
-    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\_error.js",
-    "revision": "aec959c2008962aab095"
+    "url": "/_next/static\\-MN1vOHl4YXpzJtEsIxGJ\\pages\\_error.js",
+    "revision": "a8d1def38178b92d21fd"
   },
   {
-    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\index.js",
-    "revision": "8081738034431bf02115"
+    "url": "/_next/static\\-MN1vOHl4YXpzJtEsIxGJ\\pages\\index.js",
+    "revision": "363d03e5016d41b6fb53"
   },
   {
-    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\repositories.js",
-    "revision": "bfe76a826fdfec4244e0"
+    "url": "/_next/static\\-MN1vOHl4YXpzJtEsIxGJ\\pages\\repositories.js",
+    "revision": "2293feea416739eb56e3"
   },
   {
-    "url": "/_next/static\\gXrQL_CpamSwmaeaevxCo\\pages\\users.js",
-    "revision": "29d9a8154a37d19098a2"
+    "url": "/_next/static\\-MN1vOHl4YXpzJtEsIxGJ\\pages\\users.js",
+    "revision": "f6f94840a924698627aa"
   }
 ];
 

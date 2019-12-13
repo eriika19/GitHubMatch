@@ -27,13 +27,17 @@ class UsersPage extends Component {
     Router.onRouteChangeError = () => {
       this.setState({ loading: false });
     };
-
-    this.cleanMatchedUsers();
   }
 
   cleanMatchedUsers = () => {
     this.setState({
-      matchUsers: null
+      matchUsers: ""
+    });
+  };
+
+  toggleSearching = () => {
+    this.setState({
+      searching: !this.state.searching
     });
   };
 
@@ -46,13 +50,6 @@ class UsersPage extends Component {
     });
   };
 
-  getData = async () => {
-    const { searchValue } = this.state;
-    const response = await GitHubMatch.byUser(searchValue);
-    const { data } = response;
-    return data;
-  };
-
   handleData = async data => {
     const arrPromises = data.items.map(async item => {
       const userData = await GitHubMatch.getUser(item.login);
@@ -61,28 +58,32 @@ class UsersPage extends Component {
     return Promise.all(arrPromises);
   };
 
-  handleKeyPress = async e => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+  getData = async () => {
+    const { searchValue } = this.state;
+    const response = await GitHubMatch.byUser(searchValue);
+    const { data } = response;
+    return data;
+  };
+
+  handleSubmit = async e => {
+    //Init searching state
+    this.toggleSearching();
+    e.preventDefault();
+
+    const { searchValue } = this.state;
+
+    //Verifiy valid searchValue
+    if (searchValue.length > 0) {
+      //get searchValue results
+      const data = await this.getData(searchValue);
+      //handle results to get matchUsers array
+      const matchUsers = await this.handleData(data);
       this.setState({
-        searching: true
+        matchUsers: matchUsers
       });
-      const { searchValue } = this.state;
-
-      if (searchValue.length > 0) {
-        const data = await this.getData(searchValue);
-        if (data) {
-          const matchUsers = await this.handleData(data);
-          this.setState({
-            matchUsers: matchUsers
-          });
-        }
-
-        this.setState({
-          searching: false
-        });
-      }
     }
+    //Finalize searching state
+    this.toggleSearching();
   };
 
   render() {
@@ -96,7 +97,7 @@ class UsersPage extends Component {
         <Layout loading={loading}>
           <Fade right>
             <section id="users" className="section">
-              <form className="field">
+              <form className="field" onSubmit={this.handleSubmit}>
                 <p
                   className={
                     searching
@@ -108,7 +109,6 @@ class UsersPage extends Component {
                     className="input is-info is-rounded"
                     type="text"
                     placeholder="Buscar usuario GitHub.."
-                    onKeyPress={this.handleKeyPress}
                     onChange={this.handleChange}
                     value={searchValue}
                   />
@@ -117,28 +117,24 @@ class UsersPage extends Component {
                   </span>
                 </p>
               </form>
-              <section id="results">
-                {matchUsers === null ? (
-                  ""
-                ) : matchUsers.size === 0 ? (
-                  <p className="is-danger">No se encontraron coincidencias</p>
-                ) : (
-                  `Se encontró ${matchUsers.length} coincidencia(s)`
-                )}
+              <section id="result">
+                {matchUsers === ""
+                  ? ``
+                  : `Se encontró ${matchUsers.length} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
-                    {Array.isArray(matchUsers)
-                      ? matchUsers.map((props, i) => (
+                  {matchUsers.length > 0
+                    ? matchUsers.map((props, i) => (
                         <UserCard {...props} key={i} />
                       ))
-                      : ``}
-                  </div>
-                </section>
+                    : ``}
+                </div>
               </section>
-            </Fade>
-          </Layout>
-        </div>
-      );
-    }
+            </section>
+          </Fade>
+        </Layout>
+      </div>
+    );
+  }
 }
 
 export default UsersPage;

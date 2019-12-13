@@ -2,10 +2,6 @@ import { Component } from "react";
 import Link from "next/link";
 
 class Nav extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle;
-  }
 
   state = {
     navMenuOpen: ""
