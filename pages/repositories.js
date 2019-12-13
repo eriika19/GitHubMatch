@@ -4,12 +4,17 @@ import Head from "next/head";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Layout from "../components/Layout";
+import GitHubMatch from "../utils/apiCalls";
 
-class RepostitoriesPage extends Component {
+import Layout from "../components/Layout";
+import RepoCard from "../components/RepoCard";
+
+class ReposPage extends Component {
   state = {
     loading: false,
-    searchValue: ""
+    searching: false,
+    searchValue: "",
+    matchRepos: ""
   };
 
   componentDidMount() {
@@ -22,35 +27,92 @@ class RepostitoriesPage extends Component {
     Router.onRouteChangeError = () => {
       this.setState({ loading: false });
     };
+
+    this.setState({
+      matchRepos: null
+    });
   }
 
   handleChange = e => {
-    if (e.target.value.length > 0) {
+    if (e.target.value.length < 2) {
       this.setState({
-        searchValue: e.target.value
+        matchRepos: null
+      });
+    }
+    this.setState({
+      searchValue: e.target.value
+    });
+  };
+
+  getData = async searchValue => {
+    const response = await GitHubMatch.byRepo(searchValue);
+    if (response.data.total_count > 0) {
+      const data = response.data;
+      return data;
+    } else {
+      return false;
+    }
+  };
+
+  /*   handleData = async data => {
+    const arrPromises = data.items.map(async item => {
+      const repoData = await GitHubMatch.getRepo();
+      return repoData;
+    });
+    return Promise.all(arrPromises);
+  }; */
+
+  handleKeyPress = async e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      this.setState({
+        searching: true
+      });
+      const { searchValue } = this.state;
+
+      if (searchValue.length > 0) {
+        const data = await this.getData(searchValue);
+        if (data) {
+          //const matchRepos = await this.handleData(data);
+          const matchRepos = data.items;
+    //      console.log(matchRepos);
+          
+
+          this.setState({
+            matchRepos: matchRepos
+          });
+        } else {
+          this.setState({
+            matchRepos: false
+          });
+        }
+      }
+
+      this.setState({
+        searching: false
       });
     }
   };
 
-  handleKeyPress = e => {
-    if (e.key === "Enter") {
-      alert("Se ha enviado un valor de búsqueda " + this.state.searchValue);
-      e.preventDefault();
-    }
-  };
-
   render() {
-    const { loading, searchValue } = this.state;
+    const { loading, searching, searchValue, matchRepos } = this.state;
+
     return (
       <div>
         <Head>
-          <title>Luuna | GitHub Repositories Match</title>
+          <title>Luuna | GitHub Match Repos</title>
         </Head>
         <Layout loading={loading}>
           <Fade right>
-            <section id="repostitories" className="section">
+            <section id="repositories" className="section">
               <form className="field">
-                <p className="control has-icons-left is-expanded">
+                <p
+                  className={
+                    searching
+                      ? "control has-icons-left is-expanded is-loading"
+                      : "control has-icons-left is-expanded"
+                  }
+                >
                   <input
                     className="input is-info is-rounded"
                     type="text"
@@ -64,6 +126,22 @@ class RepostitoriesPage extends Component {
                   </span>
                 </p>
               </form>
+              <section id="results">
+                {matchRepos === null ? (
+                  ""
+                ) : matchRepos === false ? (
+                  <p className="is-danger">No se encontraron coincidencias</p>
+                ) : (
+                  `Se encontró ${matchRepos.length} coincidencia(s)`
+                )}
+                <div id="results" className="container has-margin-top">
+                  {Array.isArray(matchRepos)
+                    ? matchRepos.map((props, i) => (
+                        <RepoCard {...props} key={i} />
+                      ))
+                    : ``}
+                </div>
+              </section>
             </section>
           </Fade>
         </Layout>
@@ -72,4 +150,4 @@ class RepostitoriesPage extends Component {
   }
 }
 
-export default RepostitoriesPage;
+export default ReposPage;

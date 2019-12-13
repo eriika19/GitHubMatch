@@ -4,7 +4,6 @@ const axios = require("axios");
 
 const SEARCH_BASE_URI = "https://api.github.com/search";
 const USERS_BASE_URI = "https://api.github.com/users";
-const REPOS_BASE_URI = "https://api.github.com/repositories";
 
 const handleError = response => {
   if (response.statusText === "OK") return response;

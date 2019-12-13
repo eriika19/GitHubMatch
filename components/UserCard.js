@@ -14,21 +14,19 @@ const UserCard = props => {
             <p className="title is-5">
               {name}
               <span>
-                <small>@{login}</small>
+                <a href={html_url} target="_blank">
+                  <small>@{login}</small>
+                </a>
               </span>
             </p>
             <p>
-              {bio ? bio : <br/>}
+              {bio ? bio : <br />}
               <br />
               <small>{location} </small>
             </p>
-            <div class="field has-addons">
-              <p class="control">
-                <a
-                  className="level-item"
-                  href={html_url}
-                  target="_blank"
-                >
+            <div className="field has-addons level">
+              <p className="control level-item">
+                <a href={html_url} target="_blank">
                   <small className="is-nice-blue">Abrir GitHub</small>
                 </a>
               </p>
@@ -39,9 +37,6 @@ const UserCard = props => {
           {`
             figure {
               margin: 1rem;
-            }
-            img.is-rounded {
-              margin: 0;
             }
           `}
         </style>

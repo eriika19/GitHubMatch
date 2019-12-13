@@ -63,11 +63,12 @@ const MyApp = ({ Component, pageProps }) => {
           }
 
           .is-nice-blue {
-            color: #b3d4fc;
+            color: #5b7bb2;
+            font-weight: 600;
           }
 
           .is-nice-blue:hover {
-            color: #5b7bb2;
+            color: #b3d4fc;
           }
 
           .is-bgnice-blue {
@@ -102,6 +103,10 @@ const MyApp = ({ Component, pageProps }) => {
           .image img {
             margin-top: 0.55rem;
             margin-left: 0.9rem;
+          }
+
+          img.is-rounded {
+            margin: 0;
           }
 
           span {

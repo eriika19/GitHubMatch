@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Router from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import Fade from "react-reveal/Fade";
@@ -8,10 +9,21 @@ import Splash from "../components/Splash";
 
 class Home extends Component {
   state = {
+    loading: false,
     load: ""
   };
 
   componentDidMount() {
+    Router.onRouteChangeStart = () => {
+      this.setState({ loading: true });
+    };
+    Router.onRouteChangeComplete = () => {
+      this.setState({ loading: false });
+    };
+    Router.onRouteChangeError = () => {
+      this.setState({ loading: false });
+    };
+
     window.addEventListener("load", this.handleLoad);
     window.addEventListener("scroll", this.changeState, true);
 
@@ -21,7 +33,7 @@ class Home extends Component {
   }
 
   handleLoad = () => {
-    setTimeout(this.changeState, 800);
+    setTimeout(this.changeState, 700);
   };
 
   changeState = () => {
@@ -31,9 +43,9 @@ class Home extends Component {
   };
 
   render() {
-    const { load } = this.state;
+    const { load, loading } = this.state;
     return (
-      <Layout loading={false}>
+      <Layout loading={loading}>
         <Head>
           <title>Luuna | GitHub Match</title>
         </Head>
