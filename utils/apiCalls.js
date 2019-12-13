@@ -1,27 +1,62 @@
-/* import "isomorphic-unfetch";
+import Router from "next/router";
 
-import { API_KEY } from "./config";
+const axios = require("axios");
 
-const BASE_URI = "https://api.themoviedb.org/3/movie";
-const IMAGE_BASE_URI = "https://image.tmdb.org/t/p";
+const SEARCH_BASE_URI = "https://api.github.com/search";
+const USERS_BASE_URI = "https://api.github.com/users";
 
-const fetchWithErrorHandling = async url => {
+const handleError = response => {
+  if (response.statusText === "OK") return response;
+  switch (response.status) {
+    case 404:
+      throw Object.create({
+        error: "No se encontraron coincidencias para la búsqueda"
+      });
+    case 403:
+      Router.push("/403");
+      break;
+    case 401:
+      Router.push("/401");
+      break;
+    case 500:
+      Router.push("/500");
+      break;
+  }
+  return response;
+};
+
+const axiosWithErrorHandling = async url => {
   try {
-    return await (await fetch(url)).json();
-  } catch (err) {
+    const response = await axios.get(url);
+    const handleResponse = handleError(response);
+    return handleResponse;
+  } catch (error) {
+    console.error(error);
     return { error: true };
   }
 };
 
-export const getMovieDetails = async id =>
-  fetchWithErrorHandling(
-    `${BASE_URI}/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`
-  );
+const GitHubMatch = {
+  byUser: async searchValue => {
+    const response = await axiosWithErrorHandling(
+      `${SEARCH_BASE_URI}/users?q=${searchValue}`
+    );
+    return response;
+  },
 
-export const getUpcomingMovies = async () =>
-  fetchWithErrorHandling(
-    `${BASE_URI}/upcoming?api_key=${API_KEY}&language=en-US&page=1`
-  );
+  getUser: async searchValue => {
+    const response = await axiosWithErrorHandling(
+      `${USERS_BASE_URI}/${searchValue}`
+    );
+    return response.data;
+  },
 
-export const getImageSrc = (path, size) =>
-  `${IMAGE_BASE_URI}/${size ? `w${size}` : "original"}${path}`; */
+  byRepo: async searchValue => {
+    const response = await axiosWithErrorHandling(
+      `${SEARCH_BASE_URI}/repositories?q=${searchValue}`
+    );
+    return response;
+  }
+};
+
+export default GitHubMatch;

@@ -20,5 +20,8 @@ workbox
 # config
 config.js
 
+#credentials
+/utils/credentials
+
 #config VSCode
 /.vscode

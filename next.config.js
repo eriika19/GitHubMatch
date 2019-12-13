@@ -8,10 +8,7 @@ const nextConfig = {
   workboxOpts: {
     clientsClaim: true,
     skipWaiting: true,
-/*     modifyURLPrefix: {
-      ".next": "/_next"
-    }, */
-   //swDest: path.join(__dirname, "public/service-worker.js"),
+    swDest: path.join(__dirname, "public/service-worker.js"),
 
     runtimeCaching: [
       {
@@ -32,9 +29,9 @@ const nextConfig = {
           cacheableResponse: {
             statuses: [0, 200],
             headers: {
-              'x-test': 'true'
+              "x-test": "true"
             }
-        }
+          }
         }
       },
       {

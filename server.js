@@ -1,7 +1,8 @@
+const { join } = require("path");
+const { resolve: urlResolve } = require("url");
 const express = require("express");
 const next = require("next");
 const Keyv = require("keyv");
-const { resolve: urlResolve } = require("url");
 const normalizeUrl = require("normalize-url");
 const cacheableResponse = require("cacheable-response");
 
@@ -83,7 +84,17 @@ app
       handle(req, res);
     });
 
-    server.get("/service-worker.js", ServiceWorker(app));
+    // handle GET request to /service-worker.js
+    server.get("/service-worker.js", (req, res) => {
+      // Don't cache service worker is a best practice.
+      res.set(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, proxy-revalidate"
+      );
+      res.set("Content-Type", "application/javascript");
+      const filePath = join(__dirname, "public/service-worker.js");
+      app.serveStatic(req, res, filePath);
+    });
 
     server.get("*", (req, res) => {
       if (dev || req.query.noCache) {
@@ -111,10 +122,3 @@ app
     console.error(ex.stack);
     process.exit(1);
   });
-
-const ServiceWorker = app => (req, res) => {
-  const filePath = join(__dirname, "../", ".next", "service-worker.js");
-
-  app.serveStatic(req, res, filePath);
-};
- 
