@@ -142,8 +142,11 @@ class UsersPage extends Component {
   );
 
   ItemsPagination = page => {
+    const { lastPage } = this.state;
     const pageNumber = parseInt(page, 10);
-    const arrPages = [pageNumber - 1, pageNumber, pageNumber + 1];
+    const pages = [pageNumber - 1, pageNumber, pageNumber + 1];
+    const arrPages = pages.filter(pag => 1 <= pag && pag <= lastPage);
+
     return arrPages.map(pag => (
       <li>
         <a
