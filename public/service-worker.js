@@ -1,15 +1,19 @@
 self.__precacheManifest = [
   {
-    "url": "/_next/static/chunks/commons.74e48fbbcd9b31670787.js",
-    "revision": "d57b811462fda5c58acb"
+    "url": "/_next/static/chunks/commons.76903864591ff6fff690.js",
+    "revision": "846d73e3e98020559773"
   },
   {
-    "url": "/_next/static/chunks/styles.24ddec3ee69fb1ab5ec0.js",
-    "revision": "dd52e3b8b1d169a2fd36"
+    "url": "/_next/static/chunks/styles.5899c4789551c4e8e90f.js",
+    "revision": "5da1e0826f2f40dfa0de"
   },
   {
-    "url": "/_next/static/css/styles.e5307d3b.chunk.css",
-    "revision": "dd52e3b8b1d169a2fd36"
+    "url": "/_next/static/css/commons.032e71d6.chunk.css",
+    "revision": "846d73e3e98020559773"
+  },
+  {
+    "url": "/_next/static/css/styles.fee6c861.chunk.css",
+    "revision": "5da1e0826f2f40dfa0de"
   },
   {
     "url": "/_next/static/runtime/main-36914d9c5375bc6f17a6.js",
@@ -24,24 +28,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\47qIy657sXBxBuMB2_JTk\\pages\\_app.js",
-    "revision": "bad5106f628de5248cc8"
+    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\_app.js",
+    "revision": "7540ba135d1377d5122e"
   },
   {
-    "url": "/_next/static\\47qIy657sXBxBuMB2_JTk\\pages\\_error.js",
-    "revision": "61ed88f6f7c3f702751f"
+    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\_error.js",
+    "revision": "c91bef80d77bb50186d4"
   },
   {
-    "url": "/_next/static\\47qIy657sXBxBuMB2_JTk\\pages\\index.js",
-    "revision": "58f0fddef974dea4b178"
+    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\index.js",
+    "revision": "7140cfab5e2481faa229"
   },
   {
-    "url": "/_next/static\\47qIy657sXBxBuMB2_JTk\\pages\\repositories.js",
-    "revision": "07d86e27a16a50053bce"
+    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\repositories.js",
+    "revision": "70e7f8d64753343c360a"
   },
   {
-    "url": "/_next/static\\47qIy657sXBxBuMB2_JTk\\pages\\users.js",
-    "revision": "7edfc34f12ff5a74e23b"
+    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\users.js",
+    "revision": "4163c516dcd3ba824c59"
   }
 ];
 

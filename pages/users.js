@@ -14,7 +14,10 @@ class UsersPage extends Component {
     loading: false,
     searching: false,
     searchValue: "",
-    matchUsers: ""
+    matchUsers: "",
+    totalCount: "",
+    currentPage: "",
+    lastPage: ""
   };
 
   componentDidMount() {
@@ -29,9 +32,12 @@ class UsersPage extends Component {
     };
   }
 
-  cleanMatchedUsers = () => {
+  cleanPagination = () => {
     this.setState({
-      matchUsers: ""
+      matchUsers: "",
+      totalCount: "",
+      currentPage: "",
+      lastPage: ""
     });
   };
 
@@ -41,9 +47,27 @@ class UsersPage extends Component {
     });
   };
 
+  setTotalCount = totalCount => {
+    this.setState({
+      totalCount: totalCount
+    });
+  };
+
+  setMatchUsers = matchUsers => {
+    this.setState({
+      matchUsers: matchUsers
+    });
+  };
+
+  setCurrentPage = page => {
+    this.setState({
+      currentPage: page
+    });
+  };
+
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.cleanMatchedUsers();
+      this.cleanPagination();
     }
     this.setState({
       searchValue: e.target.value
@@ -58,34 +82,92 @@ class UsersPage extends Component {
     return Promise.all(arrPromises);
   };
 
-  getData = async () => {
+  getData = async page => {
     const { searchValue } = this.state;
-    const response = await GitHubMatch.byUser(searchValue);
+    const response = await GitHubMatch.byUser(searchValue, page);
+    //console.log(response);
+
     const { data } = response;
     return data;
   };
 
   handleSubmit = async e => {
     this.toggleSearching(); //Init searching state
-
     e.preventDefault();
 
     const { searchValue } = this.state;
+    const page = 1;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
-      const data = await this.getData(searchValue); //get searchValue results
+      const data = await this.getData(searchValue, page); //get searchValue results
       const matchUsers = await this.handleData(data); //handle results to get matchUsers array
+      const totalCount = data.total_count;
+      const lastPage = Math.ceil(totalCount / 20);
+      this.setTotalCount(totalCount); // save total of matches
+      this.setMatchUsers(matchUsers);
+      this.setCurrentPage(page);
       this.setState({
-        matchUsers: matchUsers
+        lastPage: lastPage
       });
     }
 
     this.toggleSearching(); //Finalize searching state
   };
 
+  handlePagination = async e => {
+    this.toggleSearching(); //Init searching state
+    const { searchValue } = this.state;
+    const page = e.target.name;
+
+    const data = await this.getData(searchValue, page); //get searchValue results
+    const matchUsers = await this.handleData(data); //handle results to get matchUsers array
+    this.setMatchUsers(matchUsers);
+    this.setCurrentPage(page);
+
+    this.toggleSearching(); //Finalize searching state
+  };
+
+  ItemPagination = page => (
+    <li>
+      <a
+        className="pagination-link"
+        aria-label={"Goto page " + { page }}
+        name={page}
+        onClick={e => this.handlePagination(e)}
+      >
+        {page}
+      </a>
+    </li>
+  );
+
+  ItemsPagination = page => {
+    const pageNumber = parseInt(page, 10);
+    const arrPages = [pageNumber - 1, pageNumber, pageNumber + 1];
+    return arrPages.map(pag => (
+      <li>
+        <a
+          className="pagination-link"
+          aria-label={"Goto page " + { pag }}
+          name={pag}
+          onClick={e => this.handlePagination(e)}
+        >
+          {pag}
+        </a>
+      </li>
+    ));
+  };
+
   render() {
-    const { loading, searching, searchValue, matchUsers } = this.state;
+    const {
+      loading,
+      searching,
+      searchValue,
+      matchUsers,
+      totalCount,
+      currentPage,
+      lastPage
+    } = this.state;
 
     return (
       <div>
@@ -120,7 +202,7 @@ class UsersPage extends Component {
               <section id="result">
                 {matchUsers === ""
                   ? ``
-                  : `Se encontró ${matchUsers.length} coincidencia(s)`}
+                  : `Se encontró ${totalCount} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {matchUsers.length > 0
                     ? matchUsers.map((props, i) => (
@@ -132,9 +214,62 @@ class UsersPage extends Component {
             </section>
           </Fade>
         </Layout>
+        {currentPage ? (
+          <nav
+            className="pagination is-rounded is-small is-centered "
+            role="navigation"
+            aria-label="pagination"
+          >
+            <ul className="pagination-list">
+              {this.ItemPagination(1)}
+              <li>
+                <span className="pagination-ellipsis">&hellip;</span>
+              </li>
+              {this.ItemsPagination(currentPage)}
+              <li>
+                <span className="pagination-ellipsis">&hellip;</span>
+              </li>
+              {this.ItemPagination(lastPage)}
+            </ul>
+          </nav>
+        ) : (
+          ``
+        )}
       </div>
     );
   }
 }
 
 export default UsersPage;
+
+/* 
+const ItemPagination = ({ page }) => (
+  <li>
+    <a
+      className="pagination-link"
+      aria-label={"Goto page " + { page }}
+      name={page}
+      onClick={e => this.handlePagination(e)}
+    >
+      {page}
+    </a>
+  </li>
+);
+
+const ItemsPagination = ({ page }) => {
+  const pageNumber = parseInt(page, 10);
+  const arrPages = [pageNumber - 1, pageNumber, pageNumber + 1];
+  return arrPages.map(pag => (
+    <li>
+      <a
+        className="pagination-link"
+        aria-label={"Goto page " + { pag }}
+        name={pag}
+        onClick={e => this.handlePagination(e)}
+      >
+        {pag}
+      </a>
+    </li>
+  ));
+};
+ */
