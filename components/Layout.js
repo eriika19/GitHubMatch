@@ -5,7 +5,7 @@ const Layout = props => {
   const { children, loading } = props;
 
   return (
-    <main id="main" className="has-padding-top section">
+    <main id="main" className="has-padding-top section view">
       <Nav />
       <Loader loading={loading === undefined ? false : loading} />
       {children}

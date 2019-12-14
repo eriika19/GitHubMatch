@@ -8,6 +8,7 @@ import GitHubMatch from "../utils/apiCalls";
 
 import Layout from "../components/Layout";
 import RepoCard from "../components/RepoCard";
+import Pagination from "../components/Pagination";
 
 class RepositoriesPage extends Component {
   state = {
@@ -58,24 +59,21 @@ class RepositoriesPage extends Component {
   };
 
   handleSubmit = async e => {
-    //Init searching state
-    this.toggleSearching();
+    this.toggleSearching(); //Init searching state
     e.preventDefault();
 
     const { searchValue } = this.state;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
-      //get searchValue results
-      const data = await this.getData();
-      //handle results to get matchUsers array
-      const matchRepos = data.items;
+      const data = await this.getData(); //get searchValue results
+
+      const matchRepos = data.items; //handle results to get matchUsers array
       this.setState({
         matchRepos: matchRepos
       });
     }
-    //Finalize searching state
-    this.toggleSearching();
+    this.toggleSearching(); //Finalize searching state
   };
 
   render() {
@@ -105,7 +103,9 @@ class RepositoriesPage extends Component {
                     value={searchValue}
                   />
                   <span className="icon is-small is-left">
-                    <FontAwesomeIcon className="fas" icon="search" />
+                    <i>
+                      <FontAwesomeIcon className="fas" icon="search" />
+                    </i>
                   </span>
                 </p>
               </form>
@@ -123,6 +123,7 @@ class RepositoriesPage extends Component {
               </section>
             </section>
           </Fade>
+          <Pagination />
         </Layout>
       </div>
     );

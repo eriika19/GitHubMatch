@@ -1,8 +1,8 @@
 import { Component } from "react";
 import Router from "next/router";
 import Head from "next/head";
-import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Fade from "react-reveal/Fade";
 
 import GitHubMatch from "../utils/apiCalls";
 
@@ -66,24 +66,22 @@ class UsersPage extends Component {
   };
 
   handleSubmit = async e => {
-    //Init searching state
-    this.toggleSearching();
+    this.toggleSearching(); //Init searching state
+
     e.preventDefault();
 
     const { searchValue } = this.state;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
-      //get searchValue results
-      const data = await this.getData(searchValue);
-      //handle results to get matchUsers array
-      const matchUsers = await this.handleData(data);
+      const data = await this.getData(searchValue); //get searchValue results
+      const matchUsers = await this.handleData(data); //handle results to get matchUsers array
       this.setState({
         matchUsers: matchUsers
       });
     }
-    //Finalize searching state
-    this.toggleSearching();
+
+    this.toggleSearching(); //Finalize searching state
   };
 
   render() {
@@ -113,7 +111,9 @@ class UsersPage extends Component {
                     value={searchValue}
                   />
                   <span className="icon is-small is-left">
-                    <FontAwesomeIcon className="fas" icon="search" />
+                    <i>
+                      <FontAwesomeIcon className="fas" icon="search" />
+                    </i>
                   </span>
                 </p>
               </form>

@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "hover.css/css/hover-min.css";
+
 const UserCard = props => {
   const { login, avatar_url, html_url, name, location, bio } = props;
 
@@ -24,10 +27,20 @@ const UserCard = props => {
               <br />
               <small>{location} </small>
             </p>
-            <div className="field has-addons level">
-              <p className="control level-item">
+            <div className="level">
+              <p className="level-item hvr-icon-grow">
                 <a href={html_url} target="_blank">
-                  <small className="is-nice-blue">Abrir GitHub</small>
+                  <span className="icon is-vertical-align">
+                    <i className="hvr-icon">
+                      <FontAwesomeIcon
+                        className="fas fa-lg"
+                        icon={["fab", "github-alt"]}
+                      />
+                    </i>
+                  </span>
+                  <span>
+                    <small className="is-nice-blue"> Abrir GitHub</small>
+                  </span>
                 </a>
               </p>
             </div>
