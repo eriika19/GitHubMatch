@@ -31,7 +31,7 @@ class MyApp extends App {
             }
 
             .view {
-              height: 100vh;
+              min-height: 100vh;
             }
 
             .hide {
@@ -139,8 +139,14 @@ class MyApp extends App {
             .has-margin-top {
               margin-top: 2.5rem;
             }
+
             .has-lg-margin-top {
               margin-top: 4.5rem;
+            }
+
+            .has-margin-bottom {
+              margin-bottom: 2.5rem;
+              margin-top: -4rem;
             }
 
             .card {

@@ -37,10 +37,10 @@ const axiosWithErrorHandling = async url => {
 };
 
 const GitHubMatch = {
-  byUser: async (searchValue, page) => {
+  byUser: async (searchValue, page, per_page) => {
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/users?q=${searchValue}&page=${page}&per_page=20`
-    );
+      `${SEARCH_BASE_URI}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
+    );    
     return response;
   },
 
@@ -51,9 +51,9 @@ const GitHubMatch = {
     return response.data;
   },
 
-  byRepo: async (searchValue, page) => {
+  byRepo: async (searchValue, page, per_page) => {
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/repositories?q=${searchValue}&page=${page}&per_page=20`
+      `${SEARCH_BASE_URI}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
     );
     return response;
   }

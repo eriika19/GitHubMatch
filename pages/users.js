@@ -17,7 +17,8 @@ class UsersPage extends Component {
     matchUsers: "",
     totalCount: "",
     currentPage: "",
-    lastPage: ""
+    lastPage: "",
+    perPage: ""
   };
 
   componentDidMount() {
@@ -47,20 +48,17 @@ class UsersPage extends Component {
     });
   };
 
-  setTotalCount = totalCount => {
+  setInitialPagination = (totalCount, lastPage, perPage) => {
     this.setState({
-      totalCount: totalCount
+      totalCount: totalCount,
+      lastPage: lastPage,
+      perPage: perPage
     });
   };
 
-  setMatchUsers = matchUsers => {
+  setCurrentPagination = (matchUsers, page) => {
     this.setState({
-      matchUsers: matchUsers
-    });
-  };
-
-  setCurrentPage = page => {
-    this.setState({
+      matchUsers: matchUsers,
       currentPage: page
     });
   };
@@ -82,83 +80,94 @@ class UsersPage extends Component {
     return Promise.all(arrPromises);
   };
 
-  getData = async page => {
+  getData = async (page, perPage) => {
     const { searchValue } = this.state;
-    const response = await GitHubMatch.byUser(searchValue, page);
-    //console.log(response);
-
+    const response = await GitHubMatch.byUser(searchValue, page, perPage);
     const { data } = response;
     return data;
   };
 
   handleSubmit = async e => {
-    this.toggleSearching(); //Init searching state
     e.preventDefault();
-
     const { searchValue } = this.state;
+    this.toggleSearching(); //Init searching state
+
+    //Set intial paramenters
     const page = 1;
+    const perPage = 20;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
-      const data = await this.getData(searchValue, page); //get searchValue results
+      const data = await this.getData(page, perPage); //get searchValue results
       const matchUsers = await this.handleData(data); //handle results to get matchUsers array
-      const totalCount = data.total_count;
-      const lastPage = Math.ceil(totalCount / 20);
-      this.setTotalCount(totalCount); // save total of matches
-      this.setMatchUsers(matchUsers);
-      this.setCurrentPage(page);
-      this.setState({
-        lastPage: lastPage
-      });
+      const totalCount = data.total_count; //total of matches found
+      const lastPage = Math.ceil(totalCount / perPage);
+      this.setInitialPagination(totalCount, lastPage, perPage);
+      this.setCurrentPagination(matchUsers, page);
+      console.log(this.state.matchUsers);
     }
 
     this.toggleSearching(); //Finalize searching state
   };
 
   handlePagination = async e => {
+    const { perPage } = this.state;
     this.toggleSearching(); //Init searching state
-    const { searchValue } = this.state;
     const page = e.target.name;
 
-    const data = await this.getData(searchValue, page); //get searchValue results
+    const data = await this.getData(page, perPage); //get searchValue results
     const matchUsers = await this.handleData(data); //handle results to get matchUsers array
-    this.setMatchUsers(matchUsers);
-    this.setCurrentPage(page);
+
+    this.setCurrentPagination(matchUsers, page);
+    console.log(this.state.matchUsers);
 
     this.toggleSearching(); //Finalize searching state
   };
 
-  ItemPagination = page => (
-    <li>
-      <a
-        className="pagination-link"
-        aria-label={"Goto page " + { page }}
-        name={page}
-        onClick={e => this.handlePagination(e)}
-      >
-        {page}
-      </a>
-    </li>
-  );
+  createArrPagination = lastPage => {
+    const arrPagination = [];
+    for (let i = 1; i <= lastPage; i++) {
+      arrPagination.push(i);
+    }
+    return arrPagination;
+  };
+
+  ItemPagination = (page, i) => {
+    const { currentPage } = this.state;
+    const currentPageNumber = parseInt(currentPage, 10);
+
+    return currentPageNumber == page ? (
+      <li key={i}>
+        <a
+          className="pagination-link is-current"
+          aria-label={"Page " + { page }}
+          aria-current="page"
+          name={page}
+          onClick={e => this.handlePagination(e)}
+        >
+          {page}
+        </a>
+      </li>
+    ) : (
+      <li key={i}>
+        <a
+          className="pagination-link"
+          aria-label={"Goto page " + { page }}
+          name={page}
+          onClick={e => this.handlePagination(e)}
+        >
+          {page}
+        </a>
+      </li>
+    );
+  };
 
   ItemsPagination = page => {
     const { lastPage } = this.state;
     const pageNumber = parseInt(page, 10);
     const pages = [pageNumber - 1, pageNumber, pageNumber + 1];
     const arrPages = pages.filter(pag => 1 <= pag && pag <= lastPage);
-
-    return arrPages.map(pag => (
-      <li>
-        <a
-          className="pagination-link"
-          aria-label={"Goto page " + { pag }}
-          name={pag}
-          onClick={e => this.handlePagination(e)}
-        >
-          {pag}
-        </a>
-      </li>
-    ));
+    return arrPages.map((pag, i) => this.ItemPagination(pag, i));
   };
 
   render() {
@@ -171,6 +180,9 @@ class UsersPage extends Component {
       currentPage,
       lastPage
     } = this.state;
+
+    const arrPagination =
+      lastPage > 6 ? [] : this.createArrPagination(lastPage);
 
     return (
       <div>
@@ -218,23 +230,35 @@ class UsersPage extends Component {
           </Fade>
         </Layout>
         {currentPage ? (
-          <nav
-            className="pagination is-rounded is-small is-centered "
-            role="navigation"
-            aria-label="pagination"
-          >
-            <ul className="pagination-list">
-              {this.ItemPagination(1)}
-              <li>
-                <span className="pagination-ellipsis">&hellip;</span>
-              </li>
-              {this.ItemsPagination(currentPage)}
-              <li>
-                <span className="pagination-ellipsis">&hellip;</span>
-              </li>
-              {this.ItemPagination(lastPage)}
-            </ul>
-          </nav>
+          lastPage > 5 ? (
+            <nav
+              className="pagination is-rounded is-centered has-margin-bottom"
+              role="navigation"
+              aria-label="pagination"
+            >
+              <ul className="pagination-list">
+                {this.ItemPagination(1)}
+                <li>
+                  <span className="pagination-ellipsis">&hellip;</span>
+                </li>
+                {this.ItemsPagination(currentPage)}
+                <li>
+                  <span className="pagination-ellipsis">&hellip;</span>
+                </li>
+                {this.ItemPagination(lastPage)}
+              </ul>
+            </nav>
+          ) : (
+            <nav
+              className="pagination is-rounded is-centered has-margin-bottom"
+              role="navigation"
+              aria-label="pagination"
+            >
+              <ul className="pagination-list">
+                {arrPagination.map((page, i) => this.ItemPagination(page, i))}
+              </ul>
+            </nav>
+          )
         ) : (
           ``
         )}
@@ -245,34 +269,4 @@ class UsersPage extends Component {
 
 export default UsersPage;
 
-/* 
-const ItemPagination = ({ page }) => (
-  <li>
-    <a
-      className="pagination-link"
-      aria-label={"Goto page " + { page }}
-      name={page}
-      onClick={e => this.handlePagination(e)}
-    >
-      {page}
-    </a>
-  </li>
-);
 
-const ItemsPagination = ({ page }) => {
-  const pageNumber = parseInt(page, 10);
-  const arrPages = [pageNumber - 1, pageNumber, pageNumber + 1];
-  return arrPages.map(pag => (
-    <li>
-      <a
-        className="pagination-link"
-        aria-label={"Goto page " + { pag }}
-        name={pag}
-        onClick={e => this.handlePagination(e)}
-      >
-        {pag}
-      </a>
-    </li>
-  ));
-};
- */
