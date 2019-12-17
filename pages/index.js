@@ -1,13 +1,20 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Router from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import Fade from "react-reveal/Fade";
 
-import Layout from "../components/Layout";
+//import Layout from "../components/Layout";
 import Splash from "../components/Splash";
+import Loader from "../components/Loader";
 
 class Home extends Component {
+/*   static async getInitialProps({ store }) {
+    store.dispatch({ type: "SOME_ASYNC_ACTION_REQUEST" });
+    return { staticData: "Hello world!" };
+  } */
+
   state = {
     loading: false,
     load: false
@@ -33,8 +40,8 @@ class Home extends Component {
     window.removeEventListener("scroll", this.changeState);
   }
 
+  // Manejo de Splash con logo de Luuna
   handleLoad = () => {
-    // Manejo de Splash con logo de Luuna
     setTimeout(this.changeState, 700);
   };
 
@@ -45,9 +52,11 @@ class Home extends Component {
   };
 
   render() {
+    console.log(this.props);
+    
     const { load, loading } = this.state;
     return (
-      <Layout loading={loading}>
+      <main className="has-padding-top section view">
         <Head>
           <title>Luuna | GitHub Match</title>
         </Head>
@@ -80,9 +89,10 @@ class Home extends Component {
             </div>
           </section>
         </Fade>
-      </Layout>
+        <Loader loading={loading} />
+      </main>
     );
   }
 }
 
-export default Home;
+export default connect(state => state)(Home);

@@ -1,8 +1,15 @@
-import App from "next/app";
+import React from "react";
+import { Provider } from "react-redux";
+import App, { Container } from "next/app";
+import withRedux from "next-redux-wrapper";
+import withReduxSaga from "next-redux-saga";
+
 import "bulma/css/bulma.min.css";
 import "hover.css/css/hover-min.css";
 import "bulma-pageloader/dist/css/bulma-pageloader.min.css";
 
+
+// Init fontawesome library and config
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
 config.autoAddCss = false;
@@ -11,18 +18,35 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faGithubAlt } from "@fortawesome/free-brands-svg-icons";
 library.add(faSearch, faGithubAlt);
 
+import configureStore from "../redux/configure-store";
 import Header from "../components/Header";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
 class MyApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    return {
+      pageProps: {
+        // Call page-level getInitialProps
+        ...(Component.getInitialProps
+          ? await Component.getInitialProps(ctx)
+          : {})
+      }
+    };
+  }
+
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, store } = this.props;
 
     return (
-      <div className="container is-fluid">
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
+      <Container className="container is-fluid">
+        <Provider store={store}>
+          <Header />
+          <Nav />
+          <Component {...pageProps} />
+          <Footer />
+        </Provider>
+
         <style jsx global>
           {`
             body {
@@ -182,9 +206,9 @@ class MyApp extends App {
             }
           `}
         </style>
-      </div>
+      </Container>
     );
   }
 }
 
-export default MyApp;
+export default withRedux(configureStore)(withReduxSaga(MyApp));

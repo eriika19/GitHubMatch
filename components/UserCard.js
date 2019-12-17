@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "hover.css/css/hover-min.css";
 
 const UserCard = props => {
   const { login, avatar_url, html_url, name, location, bio } = props;

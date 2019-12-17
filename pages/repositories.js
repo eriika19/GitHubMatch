@@ -4,7 +4,7 @@ import Head from "next/head";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import GitHubMatch from "../utils/apiCalls";
+import GitHubMatch from "../utils/api-calls";
 
 import Layout from "../components/Layout";
 import RepoCard from "../components/RepoCard";
@@ -15,7 +15,7 @@ class RepositoriesPage extends Component {
     loading: false,
     searching: false,
     searchValue: "",
-    matchRepos: ""
+    reposMatch: ""
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class RepositoriesPage extends Component {
 
   cleanMatchedRepos = () => {
     this.setState({
-      matchRepos: ""
+      reposMatch: ""
     });
   };
 
@@ -68,16 +68,16 @@ class RepositoriesPage extends Component {
     if (searchValue.length > 0) {
       const data = await this.getData(); //get searchValue results
 
-      const matchRepos = data.items; //handle results to get matchUsers array
+      const reposMatch = data.items; //handle results to get matchUsers array
       this.setState({
-        matchRepos: matchRepos
+        reposMatch: reposMatch
       });
     }
     this.toggleSearching(); //Finalize searching state
   };
 
   render() {
-    const { loading, searching, searchValue, matchRepos } = this.state;
+    const { loading, searching, searchValue, reposMatch } = this.state;
 
     return (
       <div>
@@ -110,12 +110,12 @@ class RepositoriesPage extends Component {
                 </p>
               </form>
               <section id="results">
-                {matchRepos === ""
+                {reposMatch === ""
                   ? ``
-                  : `Se encontró ${matchRepos.length} coincidencia(s)`}
+                  : `Se encontró ${reposMatch.length} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
-                  {matchRepos.length > 0
-                    ? matchRepos.map((props, i) => (
+                  {reposMatch.length > 0
+                    ? reposMatch.map((props, i) => (
                         <RepoCard {...props} key={i} />
                       ))
                     : ``}

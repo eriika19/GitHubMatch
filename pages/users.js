@@ -1,27 +1,46 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Router from "next/router";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Fade from "react-reveal/Fade";
 
-import GitHubMatch from "../utils/apiCalls";
+//import GitHubMatch from "../utils/api-calls";
 
-import Layout from "../components/Layout";
+//import Layout from "../components/Layout";
 import UserCard from "../components/UserCard";
+import Oops from "../components/Oops";
+import Loader from "../components/Loader";
 
 class UsersPage extends Component {
+  /*   static async getInitialProps({ store }) {
+    store.dispatch({ type: "SOME_ASYNC_ACTION_REQUEST" });
+    return { staticData: "Hello world!" };
+  } */
+
   state = {
     loading: false,
     searching: false,
     searchValue: "",
-    matchUsers: "",
+    usersMatch: "",
     totalCount: "",
     currentPage: "",
     lastPage: "",
     perPage: ""
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchChannelList());
+    const _userCode = window.localStorage.getItem("username");
+    if (_userCode) {
+      dispatch(
+        getUserInfo({
+          username: _userCode
+        })
+      );
+    }
+
     Router.onRouteChangeStart = () => {
       this.setState({ loading: true });
     };
@@ -31,11 +50,12 @@ class UsersPage extends Component {
     Router.onRouteChangeError = () => {
       this.setState({ loading: false });
     };
+
   }
 
   cleanPagination = () => {
     this.setState({
-      matchUsers: "",
+      usersMatch: "",
       totalCount: "",
       currentPage: "",
       lastPage: ""
@@ -56,9 +76,9 @@ class UsersPage extends Component {
     });
   };
 
-  setCurrentPagination = (matchUsers, page) => {
+  setCurrentPagination = (usersMatch, page) => {
     this.setState({
-      matchUsers: matchUsers,
+      usersMatch: usersMatch,
       currentPage: page
     });
   };
@@ -72,7 +92,7 @@ class UsersPage extends Component {
     });
   };
 
-  handleData = async data => {
+  getUsersArr = async data => {
     const arrPromises = data.items.map(async item => {
       const userData = await GitHubMatch.getUser(item.login);
       return userData;
@@ -99,12 +119,12 @@ class UsersPage extends Component {
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
       const data = await this.getData(page, perPage); //get searchValue results
-      const matchUsers = await this.handleData(data); //handle results to get matchUsers array
+      const usersMatch = await this.getUsersArr(data); //handle results to get usersMatch array
       const totalCount = data.total_count; //total of matches found
-      const lastPage = Math.ceil(totalCount / perPage);
-      this.setInitialPagination(totalCount, lastPage, perPage);
-      this.setCurrentPagination(matchUsers, page);
-      console.log(this.state.matchUsers);
+      const lastPage = Math.ceil(totalCount / perPage - 1);
+      this.setInitialPagination(data);
+      this.setCurrentPagination(usersMatch, page);
+      console.log(this.state.usersMatch);
     }
 
     this.toggleSearching(); //Finalize searching state
@@ -116,10 +136,10 @@ class UsersPage extends Component {
     const page = e.target.name;
 
     const data = await this.getData(page, perPage); //get searchValue results
-    const matchUsers = await this.handleData(data); //handle results to get matchUsers array
+    const usersMatch = await this.getUsersArr(data); //handle results to get usersMatch array
 
-    this.setCurrentPagination(matchUsers, page);
-    console.log(this.state.matchUsers);
+    this.setCurrentPagination(usersMatch, page);
+    console.log(this.state.usersMatch);
 
     this.toggleSearching(); //Finalize searching state
   };
@@ -171,64 +191,66 @@ class UsersPage extends Component {
   };
 
   render() {
+    console.log(this.props);
+
     const {
       loading,
       searching,
       searchValue,
-      matchUsers,
+      usersMatch,
       totalCount,
       currentPage,
       lastPage
     } = this.state;
 
-    const arrPagination =
-      lastPage > 6 ? [] : this.createArrPagination(lastPage);
-
     return (
-      <div>
+      <main className="has-padding-top section view">
         <Head>
           <title>Luuna | GitHub Match Users</title>
         </Head>
-        <Layout loading={loading}>
-          <Fade right>
-            <section id="users" className="section">
-              <form className="field" onSubmit={this.handleSubmit}>
-                <p
-                  className={
-                    searching
-                      ? "control has-icons-left is-expanded is-loading"
-                      : "control has-icons-left is-expanded"
-                  }
-                >
-                  <input
-                    className="input is-info is-rounded"
-                    type="text"
-                    placeholder="Buscar usuario GitHub.."
-                    onChange={this.handleChange}
-                    value={searchValue}
-                  />
-                  <span className="icon is-small is-left">
-                    <i>
-                      <FontAwesomeIcon className="fas" icon="search" />
-                    </i>
-                  </span>
-                </p>
-              </form>
-              <section id="result">
-                {matchUsers === ""
-                  ? ``
-                  : `Se encontró ${totalCount} coincidencia(s)`}
-                <div id="results" className="container has-margin-top">
-                  {matchUsers.length > 0
-                    ? matchUsers.map((props, i) => (
+        <Fade right>
+          <section id="users" className="section">
+            <form className="field" onSubmit={this.handleSubmit}>
+              <p
+                className={
+                  searching
+                    ? "control has-icons-left is-expanded is-loading"
+                    : "control has-icons-left is-expanded"
+                }
+              >
+                <input
+                  className="input is-info is-rounded"
+                  type="text"
+                  placeholder="Buscar usuario GitHub.."
+                  onChange={this.handleChange}
+                  value={searchValue}
+                />
+                <span className="icon is-small is-left">
+                  <i>
+                    <FontAwesomeIcon className="fas" icon="search" />
+                  </i>
+                </span>
+              </p>
+            </form>
+            <section id="result">
+              {usersMatch === ""
+                ? ``
+                : `Se encontró ${totalCount} coincidencia(s)`}
+              <div id="results" className="container has-margin-top">
+                {usersMatch.length
+                  ? usersMatch.map((props, i) =>
+                      props === undefined ? (
+                        Oops
+                      ) : (
                         <UserCard {...props} key={i} />
-                      ))
-                    : ``}
-                </div>
-              </section>
+                      )
+                    )
+                  : ``}
+              </div>
             </section>
-          </Fade>
-        </Layout>
+          </section>
+        </Fade>
+        <Loader loading={loading} />
         {currentPage ? (
           lastPage > 5 ? (
             <nav
@@ -262,11 +284,12 @@ class UsersPage extends Component {
         ) : (
           ``
         )}
-      </div>
+      </main>
     );
   }
 }
 
-export default UsersPage;
-
-
+export default connect(state => ({
+  pagination: state.pagination,
+  usersMatch: state.usersMatch,
+}))(UsersPage);

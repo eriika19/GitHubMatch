@@ -15,9 +15,9 @@ const errorPage = ({ statusCode }) => (
   </section>
 );
 
-errorPage.getInitialProps = ({ res, err }) => {
+errorPage.getInitialProps = ({ res, err }) => {  
   const statusCode = res ? res.statusCode : err ? err.statusCode : null;
   return { statusCode };
 };
 
-export default errorPage;
+export default connect(state => state)(errorPage);

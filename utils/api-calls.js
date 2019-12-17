@@ -28,8 +28,8 @@ const handleError = response => {
 const axiosWithErrorHandling = async url => {
   try {
     const response = await axios.get(url);
-    const handleResponse = handleError(response);    
-    return handleResponse;
+  //  const handleResponse = handleError(response);
+    return response;
   } catch (error) {
     console.error(error);
     return { error: true };
@@ -40,7 +40,7 @@ const GitHubMatch = {
   byUser: async (searchValue, page, per_page) => {
     const response = await axiosWithErrorHandling(
       `${SEARCH_BASE_URI}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
-    );    
+    );
     return response;
   },
 
