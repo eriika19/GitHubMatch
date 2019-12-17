@@ -1,51 +1,82 @@
-const Pagination = (props) => {
-    return (
+const Pagination = ({ handlePagination, lastPage, currentPage}) => {
+  const arrPagination = lastPage > 6 ? [] : createArrPagination(lastPage);
+
+  return currentPage ? (
+    lastPage > 5 ? (
       <nav
-        className="pagination is-rounded is-small is-centered "
+        className="pagination is-rounded is-centered has-margin-bottom"
         role="navigation"
         aria-label="pagination"
       >
-        <a className="pagination-previous">&larr; Anterior</a>
-        <a className="pagination-next">Siguiente &rarr;</a>
-        <ul className="pagination-list is-hidden-touch">
-          <li>
-            <a className="pagination-link" aria-label="Goto page 1">
-              1
-            </a>
-          </li>
+        <ul className="pagination-list">
+          {ItemPagination(handlePagination, currentPage, 1)}
           <li>
             <span className="pagination-ellipsis">&hellip;</span>
           </li>
-          <li>
-            <a className="pagination-link" aria-label="Goto page 45">
-              45
-            </a>
-          </li>
-          <li>
-            <a
-              className="pagination-link is-current"
-              aria-label="Page 46"
-              aria-current="page"
-            >
-              46
-            </a>
-          </li>
-          <li>
-            <a className="pagination-link" aria-label="Goto page 47">
-              47
-            </a>
-          </li>
+          {ItemsPagination(handlePagination, lastPage, currentPage)}
           <li>
             <span className="pagination-ellipsis">&hellip;</span>
           </li>
-          <li>
-            <a className="pagination-link" aria-label="Goto page 86">
-              86
-            </a>
-          </li>
+          {ItemPagination(handlePagination, currentPage, lastPage)}
         </ul>
       </nav>
-    );
+    ) : (
+      <nav
+        className="pagination is-rounded is-centered has-margin-bottom"
+        role="navigation"
+        aria-label="pagination"
+      >
+        <ul className="pagination-list">
+          {arrPagination.map((page, i) =>
+            ItemPagination(handlePagination, currentPage, page, i)
+          )}
+        </ul>
+      </nav>
+    )
+  ) : (
+    ``
+  );
+};
+
+const createArrPagination = lastPage => {
+  const arrPagination = [];
+  for (let i = 1; i <= lastPage; i++) {
+    arrPagination.push(i);
+  }
+  return arrPagination;
+};
+
+const ItemsPagination = (handlePagination, lastPage, currentPage) => {
+  const pageNumber = parseInt(currentPage, 10);
+  const pages = [pageNumber - 1, pageNumber, pageNumber + 1];
+  const arrPages = pages.filter(pag => 1 <= pag && pag <= lastPage);
+  return arrPages.map((pag, i) =>
+    ItemPagination(handlePagination, currentPage, pag, i)
+  );
+};
+
+const ItemPagination = (handlePagination, currentPage, page, i) => {
+  const currentPageNumber = parseInt(currentPage, 10);
+
+  return (
+    <li key={i}>
+      <a
+        className={
+          currentPageNumber == page
+            ? "pagination-link is-current"
+            : "pagination-link"
+        }
+        aria-label={
+          currentPageNumber == page ? "Page " + page : "Goto page " + page
+        }
+        aria-current={currentPageNumber == page ? "page" : ""}
+        name={page}
+        onClick={e => handlePagination(e)}
+      >
+        {page}
+      </a>
+    </li>
+  );
 };
 
 export default Pagination;

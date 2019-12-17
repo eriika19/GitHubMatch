@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "hover.css/css/hover-min.css";
 
 const getDaysAgo = date => {
   const updateAt = new Date(date);

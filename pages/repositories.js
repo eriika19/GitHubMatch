@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GitHubMatch from "../utils/apiCalls";
 
 import Layout from "../components/Layout";
+import Oops from "../components/Oops";
 import RepoCard from "../components/RepoCard";
 import Pagination from "../components/Pagination";
 
@@ -15,7 +16,11 @@ class RepositoriesPage extends Component {
     loading: false,
     searching: false,
     searchValue: "",
-    matchRepos: ""
+    matchRepos: "",
+    totalCount: "",
+    currentPage: "",
+    lastPage: "",
+    perPage: 20
   };
 
   componentDidMount() {
@@ -29,31 +34,50 @@ class RepositoriesPage extends Component {
       this.setState({ loading: false });
     };
   }
-
-  cleanMatchedRepos = () => {
-    this.setState({
-      matchRepos: ""
-    });
-  };
-
   toggleSearching = () => {
     this.setState({
       searching: !this.state.searching
     });
   };
 
+  cleanPagination = () => {
+    this.setState({
+      matchRepos: "",
+      totalCount: "",
+      currentPage: "",
+      lastPage: ""
+    });
+  };
+
+  setInitialPagination = data => {
+    const { perPage } = this.state;
+    const totalCount = data.total_count; //total of matches found
+    const lastPage = Math.ceil(totalCount / perPage);
+    this.setState({
+      totalCount: totalCount,
+      lastPage: lastPage
+    });
+  };
+
+  setCurrentPagination = (matchRepos, page) => {
+    this.setState({
+      matchRepos: matchRepos,
+      currentPage: page
+    });
+  };
+
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.cleanMatchedRepos();
+      this.cleanPagination();
     }
     this.setState({
       searchValue: e.target.value
     });
   };
 
-  getData = async () => {
+  getData = async (page, perPage) => {
     const { searchValue } = this.state;
-    const response = await GitHubMatch.byRepo(searchValue);
+    const response = await GitHubMatch.byRepo(searchValue, page, perPage);
     const { data } = response;
     return data;
   };
@@ -61,23 +85,42 @@ class RepositoriesPage extends Component {
   handleSubmit = async e => {
     this.toggleSearching(); //Init searching state
     e.preventDefault();
-
-    const { searchValue } = this.state;
+    const { searchValue, perPage } = this.state;
+    //Set intial paramenters
+    const page = 1;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
-      const data = await this.getData(); //get searchValue results
-
+      const data = await this.getData(page, perPage); //get searchValue results
       const matchRepos = data.items; //handle results to get matchUsers array
-      this.setState({
-        matchRepos: matchRepos
-      });
+      this.setInitialPagination(data);
+      this.setCurrentPagination(matchRepos, page);
     }
+    this.toggleSearching(); //Finalize searching state
+  };
+ 
+  handlePagination = async e => {
+    const { perPage } = this.state;
+    this.toggleSearching(); //Init searching state
+    const page = e.target.name;
+
+    const data = await this.getData(page, perPage); //get searchValue results
+    const matchRepos = data.items;
+
+    this.setCurrentPagination(matchRepos, page);
     this.toggleSearching(); //Finalize searching state
   };
 
   render() {
-    const { loading, searching, searchValue, matchRepos } = this.state;
+    const {
+      loading,
+      searching,
+      searchValue,
+      matchRepos,
+      totalCount,
+      currentPage,
+      lastPage
+    } = this.state;
 
     return (
       <div>
@@ -112,19 +155,19 @@ class RepositoriesPage extends Component {
               <section id="results">
                 {matchRepos === ""
                   ? ``
-                  : `Se encontró ${matchRepos.length} coincidencia(s)`}
+                  : `Se encontró ${totalCount} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {matchRepos.length > 0
                     ? matchRepos.map((props, i) => (
-                        <RepoCard {...props} key={i} />
+                        props=== undefined ? <Oops /> : <RepoCard {...props} key={i} />
                       ))
                     : ``}
                 </div>
               </section>
             </section>
           </Fade>
-          <Pagination />
         </Layout>
+        <Pagination handlePagination={this.handlePagination} lastPage={lastPage} currentPage={currentPage} />
       </div>
     );
   }

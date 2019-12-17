@@ -15,6 +15,18 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 class MyApp extends App {
+  
+  static async getInitialProps({ Component, ctx }) {
+    return {
+      pageProps: {
+        // Call page-level getInitialProps
+        ...(Component.getInitialProps
+          ? await Component.getInitialProps(ctx)
+          : {})
+      }
+    };
+  }
+
   render() {
     const { Component, pageProps } = this.props;
 

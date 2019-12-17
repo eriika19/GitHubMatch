@@ -1,13 +1,16 @@
 import { Component } from "react";
 import Router from "next/router";
 import Head from "next/head";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Fade from "react-reveal/Fade";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import GitHubMatch from "../utils/apiCalls";
 
 import Layout from "../components/Layout";
+import Oops from "../components/Oops";
 import UserCard from "../components/UserCard";
+import Pagination from "../components/Pagination";
+
 
 class UsersPage extends Component {
   state = {
@@ -18,7 +21,7 @@ class UsersPage extends Component {
     totalCount: "",
     currentPage: "",
     lastPage: "",
-    perPage: ""
+    perPage: 20
   };
 
   componentDidMount() {
@@ -33,6 +36,12 @@ class UsersPage extends Component {
     };
   }
 
+  toggleSearching = () => {
+    this.setState({
+      searching: !this.state.searching
+    });
+  };
+
   cleanPagination = () => {
     this.setState({
       matchUsers: "",
@@ -42,17 +51,13 @@ class UsersPage extends Component {
     });
   };
 
-  toggleSearching = () => {
-    this.setState({
-      searching: !this.state.searching
-    });
-  };
-
-  setInitialPagination = (totalCount, lastPage, perPage) => {
+  setInitialPagination = data => {
+    const { perPage } = this.state;
+    const totalCount = data.total_count; //total of matches found
+    const lastPage = Math.ceil((totalCount / perPage));
     this.setState({
       totalCount: totalCount,
-      lastPage: lastPage,
-      perPage: perPage
+      lastPage: lastPage
     });
   };
 
@@ -89,22 +94,18 @@ class UsersPage extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const { searchValue } = this.state;
     this.toggleSearching(); //Init searching state
-
+    const { searchValue, perPage } = this.state;
     //Set intial paramenters
     const page = 1;
-    const perPage = 20;
 
     //Verifiy valid searchValue
     if (searchValue.length > 0) {
       const data = await this.getData(page, perPage); //get searchValue results
       const matchUsers = await this.handleData(data); //handle results to get matchUsers array
-      const totalCount = data.total_count; //total of matches found
-      const lastPage = Math.ceil(totalCount / perPage);
-      this.setInitialPagination(totalCount, lastPage, perPage);
+      this.setInitialPagination(data);
       this.setCurrentPagination(matchUsers, page);
-      console.log(this.state.matchUsers);
+      //     console.log(this.state.matchUsers);
     }
 
     this.toggleSearching(); //Finalize searching state
@@ -120,54 +121,7 @@ class UsersPage extends Component {
 
     this.setCurrentPagination(matchUsers, page);
     console.log(this.state.matchUsers);
-
     this.toggleSearching(); //Finalize searching state
-  };
-
-  createArrPagination = lastPage => {
-    const arrPagination = [];
-    for (let i = 1; i <= lastPage; i++) {
-      arrPagination.push(i);
-    }
-    return arrPagination;
-  };
-
-  ItemPagination = (page, i) => {
-    const { currentPage } = this.state;
-    const currentPageNumber = parseInt(currentPage, 10);
-
-    return currentPageNumber == page ? (
-      <li key={i}>
-        <a
-          className="pagination-link is-current"
-          aria-label={"Page " + { page }}
-          aria-current="page"
-          name={page}
-          onClick={e => this.handlePagination(e)}
-        >
-          {page}
-        </a>
-      </li>
-    ) : (
-      <li key={i}>
-        <a
-          className="pagination-link"
-          aria-label={"Goto page " + { page }}
-          name={page}
-          onClick={e => this.handlePagination(e)}
-        >
-          {page}
-        </a>
-      </li>
-    );
-  };
-
-  ItemsPagination = page => {
-    const { lastPage } = this.state;
-    const pageNumber = parseInt(page, 10);
-    const pages = [pageNumber - 1, pageNumber, pageNumber + 1];
-    const arrPages = pages.filter(pag => 1 <= pag && pag <= lastPage);
-    return arrPages.map((pag, i) => this.ItemPagination(pag, i));
   };
 
   render() {
@@ -180,9 +134,6 @@ class UsersPage extends Component {
       currentPage,
       lastPage
     } = this.state;
-
-    const arrPagination =
-      lastPage > 6 ? [] : this.createArrPagination(lastPage);
 
     return (
       <div>
@@ -221,7 +172,7 @@ class UsersPage extends Component {
                 <div id="results" className="container has-margin-top">
                   {matchUsers.length > 0
                     ? matchUsers.map((props, i) => (
-                        <UserCard {...props} key={i} />
+                       props=== undefined ? <Oops/> : <UserCard {...props} key={i} />
                       ))
                     : ``}
                 </div>
@@ -229,44 +180,14 @@ class UsersPage extends Component {
             </section>
           </Fade>
         </Layout>
-        {currentPage ? (
-          lastPage > 5 ? (
-            <nav
-              className="pagination is-rounded is-centered has-margin-bottom"
-              role="navigation"
-              aria-label="pagination"
-            >
-              <ul className="pagination-list">
-                {this.ItemPagination(1)}
-                <li>
-                  <span className="pagination-ellipsis">&hellip;</span>
-                </li>
-                {this.ItemsPagination(currentPage)}
-                <li>
-                  <span className="pagination-ellipsis">&hellip;</span>
-                </li>
-                {this.ItemPagination(lastPage)}
-              </ul>
-            </nav>
-          ) : (
-            <nav
-              className="pagination is-rounded is-centered has-margin-bottom"
-              role="navigation"
-              aria-label="pagination"
-            >
-              <ul className="pagination-list">
-                {arrPagination.map((page, i) => this.ItemPagination(page, i))}
-              </ul>
-            </nav>
-          )
-        ) : (
-          ``
-        )}
+        <Pagination
+          handlePagination={this.handlePagination}
+          lastPage={lastPage}
+          currentPage={currentPage}
+        />
       </div>
     );
   }
 }
 
 export default UsersPage;
-
-
