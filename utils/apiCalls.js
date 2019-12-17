@@ -28,7 +28,7 @@ const handleError = response => {
 const axiosWithErrorHandling = async url => {
   try {
     const response = await axios.get(url);
-    const handleResponse = handleError(response);
+    const handleResponse = handleError(response);    
     return handleResponse;
   } catch (error) {
     console.error(error);
@@ -37,10 +37,10 @@ const axiosWithErrorHandling = async url => {
 };
 
 const GitHubMatch = {
-  byUser: async searchValue => {
+  byUser: async (searchValue, page, per_page) => {
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/users?q=${searchValue}`
-    );
+      `${SEARCH_BASE_URI}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
+    );    
     return response;
   },
 
@@ -51,9 +51,9 @@ const GitHubMatch = {
     return response.data;
   },
 
-  byRepo: async searchValue => {
+  byRepo: async (searchValue, page, per_page) => {
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/repositories?q=${searchValue}`
+      `${SEARCH_BASE_URI}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
     );
     return response;
   }
