@@ -12,7 +12,7 @@ const Footer = () => (
         <a href="https://github.com/eriika19/GitHubMatch"> GitHub</a> project .
         ¡Enjoy!
         <span className="icon hvr-icon-spin">
-          <i className="">
+          <i>
             <FontAwesomeIcon
               className="fas fa-lg hvr-icon"
               icon={["fab", "github-alt"]}

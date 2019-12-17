@@ -144,7 +144,7 @@ class UsersPage extends Component {
           <Fade right>
             <section id="users" className="section">
               <form className="field" onSubmit={this.handleSubmit}>
-                <p
+                <div
                   className={
                     searching
                       ? "control has-icons-left is-expanded is-loading"
@@ -158,12 +158,11 @@ class UsersPage extends Component {
                     onChange={this.handleChange}
                     value={searchValue}
                   />
-                  <span className="icon is-small is-left">
-                    <i>
-                      <FontAwesomeIcon className="fas" icon="search" />
-                    </i>
-                  </span>
-                </p>
+                  <FontAwesomeIcon
+                    className="icon is-small is-left"
+                    icon="search"
+                  />
+                </div>
               </form>
               <section id="result">
                 {matchUsers === ""
@@ -171,9 +170,13 @@ class UsersPage extends Component {
                   : `Se encontró ${totalCount} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {matchUsers.length > 0
-                    ? matchUsers.map((props, i) => (
-                       props=== undefined ? <Oops/> : <UserCard {...props} key={i} />
-                      ))
+                    ? matchUsers.map((props, i) =>
+                        props === undefined ? (
+                          <Oops />
+                        ) : (
+                          <UserCard {...props} key={i} />
+                        )
+                      )
                     : ``}
                 </div>
               </section>

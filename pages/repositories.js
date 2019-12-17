@@ -98,7 +98,7 @@ class RepositoriesPage extends Component {
     }
     this.toggleSearching(); //Finalize searching state
   };
- 
+
   handlePagination = async e => {
     const { perPage } = this.state;
     this.toggleSearching(); //Init searching state
@@ -131,7 +131,7 @@ class RepositoriesPage extends Component {
           <Fade right>
             <section id="repositories" className="section">
               <form className="field" onSubmit={this.handleSubmit}>
-                <p
+                <div
                   className={
                     searching
                       ? "control has-icons-left is-expanded is-loading"
@@ -145,12 +145,11 @@ class RepositoriesPage extends Component {
                     onChange={this.handleChange}
                     value={searchValue}
                   />
-                  <span className="icon is-small is-left">
-                    <i>
-                      <FontAwesomeIcon className="fas" icon="search" />
-                    </i>
-                  </span>
-                </p>
+                  <FontAwesomeIcon
+                    className="icon is-small is-left"
+                    icon="search"
+                  />
+                </div>
               </form>
               <section id="results">
                 {matchRepos === ""
@@ -158,16 +157,24 @@ class RepositoriesPage extends Component {
                   : `Se encontró ${totalCount} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {matchRepos.length > 0
-                    ? matchRepos.map((props, i) => (
-                        props=== undefined ? <Oops /> : <RepoCard {...props} key={i} />
-                      ))
+                    ? matchRepos.map((props, i) =>
+                        props === undefined ? (
+                          <Oops />
+                        ) : (
+                          <RepoCard {...props} key={i} />
+                        )
+                      )
                     : ``}
                 </div>
               </section>
             </section>
           </Fade>
         </Layout>
-        <Pagination handlePagination={this.handlePagination} lastPage={lastPage} currentPage={currentPage} />
+        <Pagination
+          handlePagination={this.handlePagination}
+          lastPage={lastPage}
+          currentPage={currentPage}
+        />
       </div>
     );
   }

@@ -143,6 +143,12 @@ class MyApp extends App {
               color: #7a6ff0;
             }
 
+            .control.has-icons-left .icon.is-left {
+              left: 3px;
+              height: 1.6rem;
+              margin-top: 0.47rem;
+            }
+
             .is-info.input {
               border-color: #5b7bb2;
               border-width: 0.1rem;
