@@ -6,17 +6,17 @@ class Nav extends PureComponent {
     navMenuOpen: false
   };
 
+  NAV_ITEM = [
+    { page: "Inicio", route: "/" },
+    { page: "Usuarios", route: "/users" },
+    { page: "Repositorios", route: "/repositories" }
+  ];
+
   toggle = () => {
     this.setState({
       navMenuOpen: !this.state.navMenuOpen
     });
   };
-
-  NAV_ITEM = [
-      { page: "Inicio", route: "/" },
-      { page: "Usuarios", route: "/users" },
-      { page: "Repositorios", route: "/repositories" }
-    ];
 
   render() {
     return (

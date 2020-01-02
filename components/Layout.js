@@ -29,7 +29,7 @@ class Layout extends Component {
   render() {
     const { loading } = this.state;
     const { children } = this.props;
-
+   // console.log("loadign: ", loading);
     return (
       <main id="main" className="has-padding-top section view">
         <Nav />

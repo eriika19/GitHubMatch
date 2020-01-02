@@ -1,3 +1,5 @@
+import { bool } from "prop-types";
+
 const Splash = ({ load }) => (
   <div id="splash" className={load ? " splash view hide" : " splash view"}>
     <figure className="level-item image splash-logo">
@@ -19,5 +21,9 @@ const Splash = ({ load }) => (
     </style>
   </div>
 );
+
+Splash.propTypes = {
+  load: bool.isRequired
+};
 
 export default Splash;

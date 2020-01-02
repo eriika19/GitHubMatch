@@ -45,13 +45,6 @@ const UserCard = props => {
             </div>
           </div>
         </div>
-        <style jsx>
-          {`
-            figure {
-              margin: 1rem;
-            }
-          `}
-        </style>
       </article>
     </div>
   );
