@@ -13,7 +13,6 @@ import Pagination from "../components/Pagination";
 
 class RepositoriesPage extends Component {
   state = {
-    loading: false,
     searching: false,
     searchValue: "",
     matchRepos: "",
@@ -23,17 +22,6 @@ class RepositoriesPage extends Component {
     perPage: 20
   };
 
-  componentDidMount() {
-    Router.onRouteChangeStart = () => {
-      this.setState({ loading: true });
-    };
-    Router.onRouteChangeComplete = () => {
-      this.setState({ loading: false });
-    };
-    Router.onRouteChangeError = () => {
-      this.setState({ loading: false });
-    };
-  }
   toggleSearching = () => {
     this.setState({
       searching: !this.state.searching
@@ -127,7 +115,7 @@ class RepositoriesPage extends Component {
         <Head>
           <title>Luuna | GitHub Match Repos</title>
         </Head>
-        <Layout loading={loading}>
+        <Layout>
           <Fade right>
             <section id="repositories" className="section">
               <form className="field" onSubmit={this.handleSubmit}>

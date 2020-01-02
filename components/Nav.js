@@ -1,17 +1,10 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import Link from "next/link";
 
-class Nav extends Component {
-
+class Nav extends PureComponent {
   state = {
-    navMenuOpen: ""
+    navMenuOpen: false
   };
-
-  componentDidMount() {
-    this.setState({
-      navMenuOpen: false
-    });
-  }
 
   toggle = () => {
     this.setState({
@@ -19,13 +12,13 @@ class Nav extends Component {
     });
   };
 
-  render() {
-    const data = [
-      { section: "Inicio", route: "/" },
-      { section: "Usuarios", route: "/users" },
-      { section: "Repositorios", route: "/repositories" }
+  NAV_ITEM = [
+      { page: "Inicio", route: "/" },
+      { page: "Usuarios", route: "/users" },
+      { page: "Repositorios", route: "/repositories" }
     ];
 
+  render() {
     return (
       <nav className="navbar is-fixed-top">
         <div className="container">
@@ -60,26 +53,20 @@ class Nav extends Component {
                 this.state.navMenuOpen ? "navbar-end is-active" : "navbar-end"
               }
             >
-              {data.map((props, i) => (
+              {this.NAV_ITEM.map((props, i) => (
                 <NavbarItem {...props} key={i} />
               ))}
             </div>
           </div>
         </div>
-        <style jsx>
-          {`
-
-            }
-          `}
-        </style>
       </nav>
     );
   }
 }
 
-const NavbarItem = ({ route, section, i }) => (
+const NavbarItem = ({ route, page, i }) => (
   <Link href={route} key={i}>
-    <a className="navbar-item">{section}</a>
+    <a className="navbar-item">{page}</a>
   </Link>
 );
 

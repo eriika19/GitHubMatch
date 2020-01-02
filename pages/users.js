@@ -24,18 +24,6 @@ class UsersPage extends Component {
     perPage: 20
   };
 
-  componentDidMount() {
-    Router.onRouteChangeStart = () => {
-      this.setState({ loading: true });
-    };
-    Router.onRouteChangeComplete = () => {
-      this.setState({ loading: false });
-    };
-    Router.onRouteChangeError = () => {
-      this.setState({ loading: false });
-    };
-  }
-
   toggleSearching = () => {
     this.setState({
       searching: !this.state.searching
@@ -140,7 +128,7 @@ class UsersPage extends Component {
         <Head>
           <title>Luuna | GitHub Match Users</title>
         </Head>
-        <Layout loading={loading}>
+        <Layout>
           <Fade right>
             <section id="users" className="section">
               <form className="field" onSubmit={this.handleSubmit}>
