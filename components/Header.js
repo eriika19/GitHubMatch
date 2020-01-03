@@ -1,11 +1,12 @@
 import Head from "next/head";
 
-const Header = () => (
+const Header = props => (
   <Head>
     <meta charSet="UTF-8" />
     <meta name="description" content="GitHub Match" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#B2CCFF" />
+    <title>{props.title}</title>
     <link rel="manifest" href="/_next/static/manifest.json" />
     <link rel="icon" href="/static/favicon.ico" />
     <link rel="apple-touch-icon" href="/static/apple-touch-icon.png"></link>

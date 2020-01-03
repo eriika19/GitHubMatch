@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Fade from "react-reveal/Fade";
 
@@ -34,11 +33,10 @@ class Home extends Component {
 
   render() {
     const { load } = this.state;
+   // console.log("this.props: ", this.props);
+
     return (
       <Layout>
-        <Head>
-          <title>Luuna | GitHub Match</title>
-        </Head>
         <Fade big cascade>
           <Splash load={load} />
         </Fade>

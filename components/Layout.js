@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { node } from "prop-types";
 import Router from "next/router";
 
@@ -29,12 +29,14 @@ class Layout extends Component {
   render() {
     const { loading } = this.state;
     const { children } = this.props;
-   // console.log("loadign: ", loading);
+    // console.log("loadign: ", loading);
     return (
-      <main id="main" className="has-padding-top section view">
+      <Fragment>
         <Nav />
-        <Loader loading={loading === undefined ? false : loading} />
-        {children}
+        <main id="main" className="has-padding-top section view">
+          <Loader loading={loading === undefined ? false : loading} />
+          {children}
+        </main>
         <style jsx global>
           {`
             body {
@@ -137,7 +139,7 @@ class Layout extends Component {
             }
           `}
         </style>
-      </main>
+      </Fragment>
     );
   }
 }

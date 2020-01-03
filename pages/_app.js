@@ -1,10 +1,10 @@
-
 import React from "react";
 import App, { Container } from "next/app";
 import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
-//import { withRouter } from "next/router";
+import configureStore from "../store/configure-store";
+import { RouterTitle } from "../constants/RouterTypes";
 
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
@@ -23,8 +23,7 @@ library.add(faSearch, faGithubAlt);
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-class MyApp extends App {
-  
+class NextApp extends App {
   static async getInitialProps({ Component, ctx }) {
     return {
       pageProps: {
@@ -37,20 +36,23 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store, router } = this.props;
+    console.log("this.props: ", this.props);
+    console.log("store: ", store);
 
     return (
       <Container>
-        {/* <Provider store={store}> */}
-          <Header />
-          <Component {...pageProps} />
-          <Footer />
-        {/* </Provider> */}
+        <Provider store={store}>
+          <div>
+            <Header title={RouterTitle[router.pathname]} />
+            <Component {...pageProps} />
+            <Footer />
+          </div>
+        </Provider>
       </Container>
     );
   }
 }
 
-export default MyApp;
-
-//export default withRedux(configureStore)(withReduxSaga({ async: true })(MyApp));
+//export default withRedux(configureStore)(NextApp);
+export default withRedux(configureStore)(withReduxSaga(NextApp));

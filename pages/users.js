@@ -1,16 +1,13 @@
-import { Component } from "react";
-import Router from "next/router";
-import Head from "next/head";
+import { Component, Fragment } from "react";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import GitHubMatch from "../utils/apiCalls";
+import GitHubMatch from "../utils/api-calls";
 
 import Layout from "../components/Layout";
 import Oops from "../components/Oops";
 import UserCard from "../components/UserCard";
 import Pagination from "../components/Pagination";
-
 
 class UsersPage extends Component {
   state = {
@@ -42,7 +39,7 @@ class UsersPage extends Component {
   setInitialPagination = data => {
     const { perPage } = this.state;
     const totalCount = data.total_count; //total of matches found
-    const lastPage = Math.ceil((totalCount / perPage));
+    const lastPage = Math.ceil(totalCount / perPage);
     this.setState({
       totalCount: totalCount,
       lastPage: lastPage
@@ -113,8 +110,9 @@ class UsersPage extends Component {
   };
 
   render() {
+    console.log("this.props: ", this.props);
+
     const {
-      loading,
       searching,
       searchValue,
       matchUsers,
@@ -124,10 +122,7 @@ class UsersPage extends Component {
     } = this.state;
 
     return (
-      <div>
-        <Head>
-          <title>Luuna | GitHub Match Users</title>
-        </Head>
+      <Fragment>
         <Layout>
           <Fade right>
             <section id="users" className="section">
@@ -176,7 +171,7 @@ class UsersPage extends Component {
           lastPage={lastPage}
           currentPage={currentPage}
         />
-      </div>
+      </Fragment>
     );
   }
 }

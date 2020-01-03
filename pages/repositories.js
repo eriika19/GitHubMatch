@@ -1,10 +1,8 @@
-import { Component } from "react";
-import Router from "next/router";
-import Head from "next/head";
+import { Component, Fragment } from "react";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import GitHubMatch from "../utils/apiCalls";
+import GitHubMatch from "../utils/api-calls";
 
 import Layout from "../components/Layout";
 import Oops from "../components/Oops";
@@ -101,7 +99,6 @@ class RepositoriesPage extends Component {
 
   render() {
     const {
-      loading,
       searching,
       searchValue,
       matchRepos,
@@ -111,10 +108,7 @@ class RepositoriesPage extends Component {
     } = this.state;
 
     return (
-      <div>
-        <Head>
-          <title>Luuna | GitHub Match Repos</title>
-        </Head>
+      <Fragment>
         <Layout>
           <Fade right>
             <section id="repositories" className="section">
@@ -163,7 +157,7 @@ class RepositoriesPage extends Component {
           lastPage={lastPage}
           currentPage={currentPage}
         />
-      </div>
+      </Fragment>
     );
   }
 }
