@@ -36,13 +36,6 @@ class RepositoriesPage extends PureComponent {
     });
   };
 
-  /*   getData = async (page, perPage) => {
-    const { searchValue } = this.state;
-    const response = await GitHubMatch.byRepo(searchValue, page, perPage);
-    const { data } = response;
-    return data;
-  }; */
-
   handleSubmit = e => {
     e.preventDefault();
     const { reposSearchValue } = this.state;
@@ -66,7 +59,7 @@ class RepositoriesPage extends PureComponent {
   };
 
   render() {
-    console.log("this.props: ", this.props);
+   // console.log("repositoriesProps: ", this.props);
     const { reposSearchValue } = this.state;
 
     return (
@@ -135,4 +128,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(RepositoriesPage);
-//export default connect(state => state)(RepositoriesPage);

@@ -55,7 +55,7 @@ class UsersPage extends PureComponent {
   };
 
   render() {
-    console.log("this.props: ", this.props);
+    //console.log("usersProps: ", this.props);
     const { usersSearchValue } = this.state;
 
     return (

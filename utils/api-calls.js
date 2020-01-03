@@ -1,7 +1,8 @@
 import Router from "next/router";
-import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
 
 const axios = require("axios");
+
+import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
 
 const handleError = response => {
   if (response.statusText === "OK") return response;
@@ -40,7 +41,7 @@ const GitHubMatch = {
       usersSearchValue: searchValue,
       currentPage: page,
       usersPerPage: per_page
-    } = params;    
+    } = params;
 
     const response = await axiosWithErrorHandling(
       `${SEARCH_BASE_URL}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
@@ -48,19 +49,20 @@ const GitHubMatch = {
     return response;
   },
 
-  getUser: async searchValue => {  
+  getUser: async searchValue => {
     const response = await axiosWithErrorHandling(
       `${USERS_BASE_URL}/${searchValue}`
     );
     return response.data;
   },
 
-  byRepo: async (params) => {
-        const {
-          reposSearchValue: searchValue,
-          currentPage: page,
-          reposPerPage: per_page
-        } = params; 
+  byRepo: async params => {
+    const {
+      reposSearchValue: searchValue,
+      currentPage: page,
+      reposPerPage: per_page
+    } = params;
+
     const response = await axiosWithErrorHandling(
       `${SEARCH_BASE_URL}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
     );

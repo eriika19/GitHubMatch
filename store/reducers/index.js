@@ -6,7 +6,3 @@ export default combineReducers({
   usersReducer,
   reposReducer
 });
-
-//const rootReducer = repos;
-
-//export default rootReducer;

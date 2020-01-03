@@ -6,12 +6,6 @@ class Nav extends PureComponent {
     navMenuOpen: false
   };
 
-  NAV_ITEM = [
-    { page: "Inicio", route: "/" },
-    { page: "Usuarios", route: "/users" },
-    { page: "Repositorios", route: "/repositories" }
-  ];
-
   toggle = () => {
     this.setState({
       navMenuOpen: !this.state.navMenuOpen
@@ -19,6 +13,8 @@ class Nav extends PureComponent {
   };
 
   render() {
+    //console.log('NavProps :', this.props);
+    
     return (
       <nav className="navbar is-fixed-top">
         <div className="container">
@@ -53,8 +49,8 @@ class Nav extends PureComponent {
                 this.state.navMenuOpen ? "navbar-end is-active" : "navbar-end"
               }
             >
-              {this.NAV_ITEM.map((props, i) => (
-                <NavbarItem {...props} key={i} />
+              {NAV_ITEMS.map((props, i) => (
+                <NavbarItem {...props} key={i} activeRoute= {this.props.activeRoute} />
               ))}
             </div>
           </div>
@@ -64,9 +60,15 @@ class Nav extends PureComponent {
   }
 }
 
-const NavbarItem = ({ route, page, i }) => (
-  <Link href={route} key={i}>
-    <a className="navbar-item">{page}</a>
+  const NAV_ITEMS = [
+    { page: "Inicio", route: "/" },
+    { page: "Usuarios", route: "/users" },
+    { page: "Repositorios", route: "/repositories" }
+  ];
+
+const NavbarItem = ({ route, page, activeRoute }) => (
+  <Link href={route}>
+    <a className={route === activeRoute ? "navbar-item is-active" : "navbar-item"}>{page}</a>
   </Link>
 );
 

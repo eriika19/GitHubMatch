@@ -15,7 +15,7 @@ class Home extends Component {
     window.addEventListener("scroll", this.changeState, true);
   }
 
-  componentWillUnmount() {
+   componentWillUnmount() {
     window.removeEventListener("load", this.handleLoad);
     window.removeEventListener("scroll", this.changeState);
   }

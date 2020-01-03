@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { useDispatch } from "react-redux";
 import { node } from "prop-types";
 import Router from "next/router";
 
-import Nav from "./Nav";
+import { cleanUsersMatch } from "../store/actions/users-actions";
+import { cleanReposMatch } from "../store/actions/repositories-actions";
 import Loader from "./Loader";
 
 class Layout extends Component {
@@ -16,6 +18,9 @@ class Layout extends Component {
 
   componentDidMount() {
     Router.onRouteChangeStart = () => {
+      const dispatch = useDispatch();
+      dispatch(cleanUsersMatch());
+      dispatch(cleanReposMatch());
       this.setState({ loading: true });
     };
     Router.onRouteChangeComplete = () => {
@@ -27,16 +32,13 @@ class Layout extends Component {
   }
 
   render() {
+    //console.log("layoutProps: ", this.props);
     const { loading } = this.state;
     const { children } = this.props;
-    // console.log("loadign: ", loading);
     return (
-      <Fragment>
-        <Nav />
-        <main id="main" className="has-padding-top section view">
-          <Loader loading={loading === undefined ? false : loading} />
-          {children}
-        </main>
+      <main id="main" className="has-padding-top section view">
+        <Loader loading={loading === undefined ? false : loading} />
+        {children}
         <style jsx global>
           {`
             body {
@@ -62,6 +64,10 @@ class Layout extends Component {
             a.navbar-item {
               color: #5b7bb2;
               font-size: 1.1rem;
+            }
+            a.navbar-item.is-active {
+              background-color: #d7eaf9;
+              color: #5b7bb2;
             }
             .has-padding-top {
               padding-top: 7.2rem;
@@ -139,7 +145,7 @@ class Layout extends Component {
             }
           `}
         </style>
-      </Fragment>
+      </main>
     );
   }
 }

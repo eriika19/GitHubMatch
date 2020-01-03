@@ -22,6 +22,7 @@ import { RouterTitle } from "../constants/RouterTypes";
 import configureStore from "../store/configure-store";
 
 import Header from "../components/Header";
+import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 
 class NextApp extends App {
@@ -38,20 +39,16 @@ class NextApp extends App {
 
   render() {
     const { Component, pageProps, store, router } = this.props;
- /*   console.log("this.props: ", this.props);*/
-    console.log("store: ", store); 
 
     return (
-        <Provider store={store}>
-          <div>
-            <Header title={RouterTitle[router.pathname]} />
-            <Component {...pageProps} />
-            <Footer />
-          </div>
-        </Provider>
+      <Provider store= {store}>
+          <Header title= {RouterTitle[router.pathname]} />
+          <Nav activeRoute= {router.pathname} />
+          <Component {...pageProps} />
+          <Footer />
+      </Provider>
     );
   }
 }
 
-//export default withRedux(configureStore)(NextApp);
 export default withRedux(configureStore)(withReduxSaga(NextApp));

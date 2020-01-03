@@ -18,9 +18,7 @@ function* usersMatchArr(action) {
   const { currentPage, usersPerPage } = action.payload;
   try {
     const response = yield call(GitHubMatch.byUser, action.payload);
-    const {
-      data: { total_count, items }
-    } = response;
+    const { data: { total_count, items } } = response;
     const lastPage = Math.ceil(total_count / usersPerPage);
     const pagination = { lastPage, currentPage };
 
@@ -31,25 +29,24 @@ function* usersMatchArr(action) {
 
     yield put(getUsersMatchSuccess(usersMatchArr));
     yield put(setUsersPagination({ total_count, pagination }));
+
   } catch (error) {
     console.log(error);
     yield put(getUsersMatchFail(error.message));
   }
 }
 
-
 function* reposMatchArr(action) {
   const { currentPage, reposPerPage } = action.payload;
   try {
     const response = yield call(GitHubMatch.byRepo, action.payload);
-    const {
-      data: { total_count, items: reposMatchArr }
-    } = response;
+    const { data: { total_count, items: reposMatchArr } } = response;
     const lastPage = Math.ceil(total_count / reposPerPage);
     const pagination = { lastPage, currentPage };
 
     yield put(getReposMatchSuccess(reposMatchArr));
     yield put(setReposPagination({ total_count, pagination }));
+
   } catch (error) {
     console.log(error);
     yield put(getReposMatchFail(error.message));
