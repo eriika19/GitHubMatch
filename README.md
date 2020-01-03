@@ -33,7 +33,7 @@ Aplicación Web Progresiva para todos los que desean encontrar usuarios y reposi
 ## Contenido
 
 - [Acerca del Proyecto](#acerca-del-rpoyecto)
-  - [Herramientas](#herramientas)
+  - [Herramientas](#*_herramientas_*)
   - [Próximos avances](#próximos-avances)
 - [Contacto](#contacto)
 
