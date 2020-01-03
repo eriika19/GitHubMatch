@@ -53,22 +53,6 @@ class Layout extends Component {
               align-items: center;
               justify-content: center;
             }
-            span {
-              color: #7a6ff0;
-            }
-            .nav-logo img {
-              width: 6.5rem;
-              height: auto;
-              cursor: pointer;
-            }
-            a.navbar-item {
-              color: #5b7bb2;
-              font-size: 1.1rem;
-            }
-            a.navbar-item.is-active {
-              background-color: #d7eaf9;
-              color: #5b7bb2;
-            }
             .has-padding-top {
               padding-top: 7.2rem;
             }
@@ -103,7 +87,13 @@ class Layout extends Component {
             }
             .is-nice-blue {
               color: #5b7bb2;
-              font-weight: 600;
+              font-size: 1.3rem;
+            }
+            a.navbar-item.is-active,
+            .navbar-dropdown a.navbar-item.is-active,
+            .navbar-dropdown a.navbar-item:hover {
+              background-color: #d7eaf9 !important;
+              color: #5b7bb2;
             }
             .is-bgnice-blue {
               background-color: #b3d4fc;
@@ -132,10 +122,8 @@ class Layout extends Component {
                 padding-left: 0.4rem;
                 padding-right: 0.4rem;
               }
-              .navbar-menu {
-                height: 100vh;
-              }
-              a.navbar-item {
+              a.navbar-item,
+              a.navbar-link {
                 border-bottom: 1px dashed #5b7bb2;
                 padding: 1.2rem;
                 margin-left: 1rem;

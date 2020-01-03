@@ -14,7 +14,6 @@ class Nav extends PureComponent {
 
   render() {
     //console.log('NavProps :', this.props);
-    
     return (
       <nav className="navbar is-fixed-top">
         <div className="container">
@@ -33,9 +32,9 @@ class Nav extends PureComponent {
               data-target="navbarMenuHeroB"
               onClick={this.toggle}
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <span className="is-nice-blue"></span>
+              <span className="is-nice-blue"></span>
+              <span className="is-nice-blue"></span>
             </span>
           </div>
           <div
@@ -49,27 +48,56 @@ class Nav extends PureComponent {
                 this.state.navMenuOpen ? "navbar-end is-active" : "navbar-end"
               }
             >
-              {NAV_ITEMS.map((props, i) => (
-                <NavbarItem {...props} key={i} activeRoute= {this.props.activeRoute} />
-              ))}
+              <NavbarItem {...NAV_ITEMS[0]} {...this.props} />
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <hr className="navbar-divider" />
+                <a className="navbar-link is-nice-blue">Buscar</a>
+                <div className="navbar-dropdown is-right">
+                  <NavbarItem {...NAV_ITEMS[1]} {...this.props} />
+                  <NavbarItem {...NAV_ITEMS[2]} {...this.props} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <style jsx>
+          {`
+            .nav-logo img {
+              width: 6.5rem;
+              height: auto;
+              cursor: pointer;
+            }
+            @media (max-width: 1023px) {
+              .navbar-menu {
+                height: 100vh;
+              }
+            }
+          `}
+        </style>
       </nav>
     );
   }
 }
 
-  const NAV_ITEMS = [
-    { page: "Inicio", route: "/" },
-    { page: "Usuarios", route: "/users" },
-    { page: "Repositorios", route: "/repositories" }
-  ];
-
 const NavbarItem = ({ route, page, activeRoute }) => (
   <Link href={route}>
-    <a className={route === activeRoute ? "navbar-item is-active" : "navbar-item"}>{page}</a>
+    <a
+      className={
+        route === activeRoute
+          ? "navbar-item is-nice-blue is-active"
+          : "navbar-item is-nice-blue"
+      }
+    >
+      {page}
+    </a>
   </Link>
 );
+
+const NAV_ITEMS = [
+  { page: "Inicio", route: "/" },
+  { page: "Usuarios GitHub", route: "/users" },
+  { page: "Repositorios GitHub", route: "/repositories" }
+];
 
 export default Nav;
