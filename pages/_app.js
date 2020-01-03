@@ -38,8 +38,8 @@ class NextApp extends App {
 
   render() {
     const { Component, pageProps, store, router } = this.props;
- /*   console.log("this.props: ", this.props);
-    console.log("store: ", store); */
+ /*   console.log("this.props: ", this.props);*/
+    console.log("store: ", store); 
 
     return (
         <Provider store={store}>

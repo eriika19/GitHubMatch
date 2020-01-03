@@ -123,5 +123,4 @@ const mapStateToProps = state => {
   };
 };
 
-//export default connect(mapStateToProps)(UsersPage);
-export default connect(state => state)(UsersPage);
+export default connect(mapStateToProps)(UsersPage);

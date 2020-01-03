@@ -134,5 +134,5 @@ const mapStateToProps = state => {
   };
 };
 
-//export default connect(mapStateToProps)(ReposPage);
-export default connect(state => state)(RepositoriesPage);
+export default connect(mapStateToProps)(RepositoriesPage);
+//export default connect(state => state)(RepositoriesPage);
