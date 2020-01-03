@@ -91,6 +91,7 @@ class Layout extends Component {
             }
             a.is-nice-blue {
               font-size: 1.3rem;
+              font-weight: 400;
             }
             a.navbar-item.is-active,
             .navbar-dropdown a.navbar-item.is-active,
@@ -131,6 +132,7 @@ class Layout extends Component {
                 padding: 1.2rem;
                 margin-left: 1rem;
                 margin-right: 1rem;
+                font-size: .9rem;
                 color: #777;
               }
             }

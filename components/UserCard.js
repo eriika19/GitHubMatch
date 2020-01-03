@@ -27,16 +27,16 @@ const UserCard = props => {
               <small>{location} </small>
             </p>
             <div className="level has-text-centered">
-              <p className="level-item hvr-icon-spin is-vertical-align">
+              <p className="level-item is-vertical-align">
                 <a href={html_url} target="_blank">
-                  <span className="icon">
-                    <i className="hvr-icon">
-                      <FontAwesomeIcon
-                        className="fas fa-lg"
-                        icon={["fab", "github-alt"]}
-                      />
-                    </i>
-                  </span>
+                    <span className="icon hvr-icon-spin">
+                      <i>
+                        <FontAwesomeIcon
+                          className="fas fa-lg hvr-icon"
+                          icon={["fab", "github-alt"]}
+                        />
+                      </i>
+                    </span>
                   <span>
                     <small className="is-nice-blue"> Abrir GitHub</small>
                   </span>

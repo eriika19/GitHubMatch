@@ -53,7 +53,7 @@ class Nav extends PureComponent {
               <div className="navbar-item has-dropdown is-hoverable">
                 <hr className="navbar-divider" />
                 <a className="navbar-link is-nice-blue">Buscar</a>
-                <div className="navbar-dropdown is-right">
+                <div className="navbar-dropdown is-boxed is-right">
                   <NavbarItem {...NAV_ITEMS[1]} {...this.props} />
                   <NavbarItem {...NAV_ITEMS[2]} {...this.props} />
                 </div>
