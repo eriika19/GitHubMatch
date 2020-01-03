@@ -1,5 +1,5 @@
 <!-- # GitHub Match  -->
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.isc-license.org)
+[![Framework](https://img.shields.io/badge/Framework-Next.js-important?style=plastic)](https://travis-ci.org/badges/badgerbadgerbadger) [![Version](https://img.shields.io/badge/Version-v.2.1.1b-blueviolet?style=plastic)](https://rubygems.org/gems/badgerbadgerbadger) [![License](https://img.shields.io/:license-ISC-blue.svg?style=plastic)](http://badges.isc-license.org)
 
 ---
 
@@ -32,8 +32,8 @@ Aplicación Web Progresiva para todos los que desean encontrar usuarios y reposi
 
 ## Contenido
 
-- [Acerca del Proyecto](#acerca-del-rpoyecto)
-  - [Herramientas](#*_herramientas_*)
+- [Acerca del Proyecto](#acerca-del-proyecto)
+  - [Herramientas](#_herramientas_)
   - [Próximos avances](#próximos-avances)
 - [Contacto](#contacto)
 
@@ -45,7 +45,7 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
 
  <br />
 
-#### *_Herramientas_*  🛠️
+#### *_Herramientas_* 🛠️
 
 - [Next.js](https://github.com/zeit/next.js/)
 - [Redux-Saga](https://github.com/bmealhouse/next-redux-saga)
@@ -53,9 +53,9 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
 - [Express](https://expressjs.com/)
 - [Bulma](https://bulma.io/)
 - [React-reveal](https://www.react-reveal.com/)
-- Styled Components
-- Hooks
-- Git
+- [Styled Components](https://www.styled-components.com/)
+- [Hooks](https://es.reactjs.org/docs/hooks-intro.html)
+- [Git](https://git-scm.com/)
 - [Eslint](https://eslint.org/)
 - [Now](https://zeit.co/)
 - [Font Awesome](https://fontawesome.com)
