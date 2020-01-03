@@ -87,6 +87,9 @@ class Layout extends Component {
             }
             .is-nice-blue {
               color: #5b7bb2;
+              font-weight: 600;
+            }
+            a.is-nice-blue {
               font-size: 1.3rem;
             }
             a.navbar-item.is-active,
