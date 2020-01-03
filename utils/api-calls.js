@@ -1,5 +1,7 @@
 import Router from "next/router";
-import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes"
+import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
+
+import mockData from "../data/mock-data";
 
 const axios = require("axios");
 
@@ -26,7 +28,7 @@ const handleError = response => {
 const axiosWithErrorHandling = async url => {
   try {
     const response = await axios.get(url);
-    const handleResponse = handleError(response);    
+    const handleResponse = handleError(response);
     return handleResponse;
   } catch (error) {
     console.error(error);
@@ -35,14 +37,20 @@ const axiosWithErrorHandling = async url => {
 };
 
 const GitHubMatch = {
-  byUser: async (searchValue, page, per_page) => {
+  byUser: async params => {
+    const {
+      usersSearchValue: searchValue,
+      currentPage: page,
+      usersPerPage: per_page
+    } = params;    
+
     const response = await axiosWithErrorHandling(
       `${SEARCH_BASE_URL}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
-    );    
+    );
     return response;
   },
 
-  getUser: async searchValue => {
+  getUser: async searchValue => {  
     const response = await axiosWithErrorHandling(
       `${USERS_BASE_URL}/${searchValue}`
     );

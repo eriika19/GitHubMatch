@@ -5,7 +5,10 @@ import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //import GitHubMatch from "../utils/api-calls";
-import { cleanUsersMatch, getUsersMatch } from "../store/actions/users-actions";
+import {
+  cleanUsersMatch,
+  getUsersMatch,
+} from "../store/actions/users-actions";
 import Layout from "../components/Layout";
 import Oops from "../components/Oops";
 import UserCard from "../components/UserCard";
@@ -23,8 +26,7 @@ class UsersPage extends PureComponent {
   };
 
   state = {
-    usersSearchValue: "",
-    pagination: { totalCount: "", currentPage: "", lastPage: "" }
+    usersSearchValue: ""
   };
 
   /*   toggleSearching = () => {
@@ -42,22 +44,18 @@ class UsersPage extends PureComponent {
     });
   }; */
 
-  cleanPagination = () => {
-    const { dispatch } = this.props;
-    dispatch(cleanUsersMatch());
+  /*   setInitialPagination = () => {
+    console.log("entro a set inital");
+    console.log(this.props.usersPerPage, this.props.usersTotalResults);
+    //const { usersPerPage, usersTotalResults } = this.props;
+    const currentPage = 1;
+    const lastPage = Math.ceil(
+      this.props.usersTotalResults / this.props.usersPerPage
+    );
     this.setState({
-      pagination: { totalCount: "", currentPage: "", lastPage: "" }
+      pagination: { currentPage, lastPage }
     });
-  };
-
-  setInitialPagination = data => {
-    const { usersPerPage } = this.props;
-    const totalCount = data.total_count; //total of matches found
-    const lastPage = Math.ceil(totalCount / usersPerPage);
-    this.setState({
-      pagination: { ...this.state.pagination, totalCount, lastPage }
-    });
-  };
+  }; */
 
   /*   setCurrentPagination = (usersMatch, page) => {
     this.setState({
@@ -74,7 +72,8 @@ class UsersPage extends PureComponent {
 
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.cleanPagination();
+      const { dispatch } = this.props;
+      dispatch(cleanUsersMatch());
     }
     this.setState({
       usersSearchValue: e.target.value
@@ -96,55 +95,39 @@ class UsersPage extends PureComponent {
     return data;
   }; */
 
-  handleSubmit = async (e, page = 1) => {
+  //initSearch = async dispatch => await dispatch(getUsersMatch());
+
+  handleSubmit = e => {
     e.preventDefault();
     const { usersSearchValue } = this.state;
-    const { dispatch, usersPerPage } = this.props;
 
     /* Verifiy valid searchValue */
     if (usersSearchValue.length > 0) {
-      dispatch(getUsersMatch()); //get results from usersSearchValue
-      //  dispatch(getUsersMatch({ usersSearchValue, page, usersPerPage })); //get results from usersSearchValue
-     
-      /*       const data = await this.getData(page, perPage); //get searchValue results
-      const usersMatch = await this.handleData(data); //handle results to get usersMatch array
-      this.setInitialPagination(data);*/
+      const { dispatch, usersPerPage } = this.props;
+      dispatch(getUsersMatch({ usersSearchValue, currentPage: 1, usersPerPage }));
 
-     // this.setCurrentPagination(usersMatch, page);
-      //     console.log(this.state.usersMatch);
+      //get results from usersSearchValue
+      //  dispatch(getUsersMatch({ usersSearchValue, page, usersPerPage })); //get results from usersSearchValue
+
+      /*       const data = await this.getData(page, perPage); //get searchValue results
+      const usersMatch = await this.handleData(data); //handle results to get usersMatch array*/
     }
   };
 
   handlePagination = async e => {
-    const { perPage } = this.state;
-    this.toggleSearching(); //Init searching state
+    const { usersPerPage } = this.props;
     const page = e.target.name;
 
-    const data = await this.getData(page, perPage); //get searchValue results
+    const data = await this.getData(page, UsersPerPage); //get searchValue results
     const usersMatch = await this.handleData(data); //handle results to get usersMatch array
 
-    this.setCurrentPagination(usersMatch, page);
-   // console.log(this.state.usersMatch);
-    this.toggleSearching(); //Finalize searching state
+    this.setCurrentPagination(page);
   };
 
   render() {
     console.log("this.props: ", this.props);
-    console.log("this.props.searching: ", this.props.searching);
 
-    /*     const {
-      searching,
-      searchValue,
-      usersMatch,
-      totalCount,
-      currentPage,
-      lastPage
-    } = this.state; */
-
-    const {
-      usersSearchValue,
-      pagination: { totalCount, currentPage, lastPage }
-    } = this.state;
+    const { usersSearchValue } = this.state;
 
     //const { dispatch } = this.props;
 
@@ -177,7 +160,7 @@ class UsersPage extends PureComponent {
               <section id="result">
                 {this.props.usersMatch === ""
                   ? ``
-                  : `Se encontró ${totalCount} coincidencia(s)`}
+                  : `Se encontró ${this.props.usersTotalResults} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {this.props.usersMatch.length > 0
                     ? this.props.usersMatch.map((props, i) =>
@@ -195,8 +178,8 @@ class UsersPage extends PureComponent {
         </Layout>
         <Pagination
           handlePagination={this.handlePagination}
-          lastPage={lastPage}
-          currentPage={currentPage}
+          lastPage={this.props.pagination.lastPage}
+          currentPage={this.props.pagination.currentPage}
         />
       </Fragment>
     );

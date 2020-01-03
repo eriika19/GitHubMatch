@@ -2,12 +2,15 @@ import {
   GET_USERS_MATCH,
   GET_USERS_MATCH_SUCCESS,
   GET_USERS_MATCH_FAIL,
-  CLEAN_USERS_MATCH
+  CLEAN_USERS_MATCH,
+  SET_USERS_PAGINATION
 } from "../../constants/ActionTypes";
 
 const INITIAL_STATE = {
   searching: false,
   usersMatch: "",
+  usersTotalResults: "",
+  pagination: { currentPage: "", lastPage: "" },
   error: ""
 };
 
@@ -16,6 +19,14 @@ const usersReducer = (state = INITIAL_STATE, { type, payload = {} }) => {
     case CLEAN_USERS_MATCH:
       return INITIAL_STATE;
 
+    case SET_USERS_PAGINATION: {
+      return {
+        ...state,
+        usersTotalResults: payload.total_count,
+        pagination: payload.pagination
+      };
+    }
+      
     case GET_USERS_MATCH:
       return { ...state, searching: true };
 

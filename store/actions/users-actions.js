@@ -2,7 +2,8 @@ import {
   GET_USERS_MATCH,
   GET_USERS_MATCH_SUCCESS,
   GET_USERS_MATCH_FAIL,
-  CLEAN_USERS_MATCH
+  CLEAN_USERS_MATCH,
+  SET_USERS_PAGINATION
 } from "../../constants/ActionTypes";
 
 export const getUsersMatch = (payload = {}) => ({
@@ -20,6 +21,12 @@ export const getUsersMatchFail = payload => ({
   payload
 });
 
+export const setUsersPagination = payload => ({
+  type: SET_USERS_PAGINATION,
+  payload
+});
+
 export const cleanUsersMatch = () => ({
   type: CLEAN_USERS_MATCH
 });
+
