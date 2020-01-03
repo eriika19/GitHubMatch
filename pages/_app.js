@@ -1,10 +1,8 @@
 import React from "react";
-import App, { Container } from "next/app";
+import App from "next/app";
 import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
 import withReduxSaga from "next-redux-saga";
-import configureStore from "../store/configure-store";
-import { RouterTitle } from "../constants/RouterTypes";
 
 import { config, library } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // Import the CSS
@@ -19,7 +17,10 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faGithubAlt } from "@fortawesome/free-brands-svg-icons";
 library.add(faSearch, faGithubAlt);
 
-//import configureStore from "../redux/configure-store";
+//config for _app and title 
+import { RouterTitle } from "../constants/RouterTypes";
+import configureStore from "../store/configure-store";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -37,11 +38,10 @@ class NextApp extends App {
 
   render() {
     const { Component, pageProps, store, router } = this.props;
-    console.log("this.props: ", this.props);
-    console.log("store: ", store);
+ /*   console.log("this.props: ", this.props);
+    console.log("store: ", store); */
 
     return (
-      <Container>
         <Provider store={store}>
           <div>
             <Header title={RouterTitle[router.pathname]} />
@@ -49,7 +49,6 @@ class NextApp extends App {
             <Footer />
           </div>
         </Provider>
-      </Container>
     );
   }
 }

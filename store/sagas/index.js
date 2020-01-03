@@ -36,7 +36,6 @@ import mockData from "../../data/mock-data";
 
 function* usersMatchArr() {
   yield delay(1000);
-
   yield put(getUsersMatchSuccess(mockData.items));
 }
 

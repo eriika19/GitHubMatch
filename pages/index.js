@@ -33,7 +33,6 @@ class Home extends Component {
 
   render() {
     const { load } = this.state;
-   // console.log("this.props: ", this.props);
 
     return (
       <Layout>
