@@ -1,23 +1,19 @@
 self.__precacheManifest = [
   {
-    "url": "/_next/static/chunks/commons.76903864591ff6fff690.js",
-    "revision": "846d73e3e98020559773"
+    "url": "/_next/static/chunks/commons.7164758fe283708a8f0d.js",
+    "revision": "e4a3f8d3f08f2ca2a8b4"
   },
   {
-    "url": "/_next/static/chunks/styles.5899c4789551c4e8e90f.js",
-    "revision": "5da1e0826f2f40dfa0de"
+    "url": "/_next/static/chunks/styles.b314d5a56ab2e9ea3b68.js",
+    "revision": "5bd24622c53748b1bacf"
   },
   {
-    "url": "/_next/static/css/commons.032e71d6.chunk.css",
-    "revision": "846d73e3e98020559773"
+    "url": "/_next/static/css/styles.1773f116.chunk.css",
+    "revision": "5bd24622c53748b1bacf"
   },
   {
-    "url": "/_next/static/css/styles.fee6c861.chunk.css",
-    "revision": "5da1e0826f2f40dfa0de"
-  },
-  {
-    "url": "/_next/static/runtime/main-36914d9c5375bc6f17a6.js",
-    "revision": "e97b99f1937a8f3f24bf"
+    "url": "/_next/static/runtime/main-7dade8777a133b1f5386.js",
+    "revision": "3d27ebea42a4a9020fb0"
   },
   {
     "url": "/_next/static/runtime/polyfills-f5af81b00d12d923ec0f.js",
@@ -28,24 +24,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\_app.js",
-    "revision": "7540ba135d1377d5122e"
+    "url": "/_next/static\\LqzOeYcEtMXBEtxRLL1HP\\pages\\_app.js",
+    "revision": "6e51ba5854085c52c98f"
   },
   {
-    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\_error.js",
-    "revision": "c91bef80d77bb50186d4"
+    "url": "/_next/static\\LqzOeYcEtMXBEtxRLL1HP\\pages\\_error.js",
+    "revision": "8bc81063d15672ede2e2"
   },
   {
-    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\index.js",
-    "revision": "7140cfab5e2481faa229"
+    "url": "/_next/static\\LqzOeYcEtMXBEtxRLL1HP\\pages\\index.js",
+    "revision": "30d21e176fbc03d474e4"
   },
   {
-    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\repositories.js",
-    "revision": "70e7f8d64753343c360a"
+    "url": "/_next/static\\LqzOeYcEtMXBEtxRLL1HP\\pages\\repositories.js",
+    "revision": "9b1c112d167239a811be"
   },
   {
-    "url": "/_next/static\\XwLeam8igS33D9OsIhYG_\\pages\\users.js",
-    "revision": "4163c516dcd3ba824c59"
+    "url": "/_next/static\\LqzOeYcEtMXBEtxRLL1HP\\pages\\users.js",
+    "revision": "20240c3faf6b9593e062"
   }
 ];
 

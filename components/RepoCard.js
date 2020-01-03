@@ -33,7 +33,7 @@ const RepoCard = props => {
         </figure>
         <div className="media-content">
           <div className="content">
-            <p className="title is-5">
+            <p className="title is-5 is-not-spaced">
               {name}
               <br />
               <span>
@@ -42,19 +42,15 @@ const RepoCard = props => {
                 </a>
               </span>
             </p>
+              <p><small> {`Forks: ${forks_count}`} </small></p>
             <p>{description ? description : <br />}</p>
             <small>
-              <time>{`Actualizado hace: ${daysAgo} día(s)`}</time>
+              <time>{`Actualizado hace ${daysAgo} día(s)`}</time>
             </small>
-            <br />
-            <small>
-              {`Forks: `}
-              {forks_count}
-            </small>
-            <div className="level ">
-              <p className="level-item hvr-icon-grow">
+            <div className="level has-text-centered">
+              <p className="level-item hvr-icon-spin is-vertical-align">
                 <a href={html_url} target="_blank">
-                  <span className="icon is-vertical-align">
+                  <span className="icon">
                     <i className="hvr-icon">
                       <FontAwesomeIcon
                         className="fas fa-lg"
@@ -62,10 +58,9 @@ const RepoCard = props => {
                       />
                     </i>
                   </span>
-                  <span>
+                  <span className="is-vertical-align">
                     <small className="is-nice-blue">
-                      {" "}
-                      Abrir Repositorio GitHub
+                      {` Abrir Repositorio GitHub`}
                     </small>
                   </span>
                 </a>
@@ -79,18 +74,11 @@ const RepoCard = props => {
                   </a>
                 </p>
               ) : (
-                ``
+                ""
               )}
             </div>
           </div>
         </div>
-        <style jsx>
-          {`
-            figure {
-              margin: 1rem;
-            }
-          `}
-        </style>
       </article>
     </div>
   );

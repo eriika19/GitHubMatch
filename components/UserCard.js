@@ -26,10 +26,10 @@ const UserCard = props => {
               <br />
               <small>{location} </small>
             </p>
-            <div className="level">
-              <p className="level-item hvr-icon-grow">
+            <div className="level has-text-centered">
+              <p className="level-item hvr-icon-spin is-vertical-align">
                 <a href={html_url} target="_blank">
-                  <span className="icon is-vertical-align">
+                  <span className="icon">
                     <i className="hvr-icon">
                       <FontAwesomeIcon
                         className="fas fa-lg"
@@ -45,13 +45,6 @@ const UserCard = props => {
             </div>
           </div>
         </div>
-        <style jsx>
-          {`
-            figure {
-              margin: 1rem;
-            }
-          `}
-        </style>
       </article>
     </div>
   );

@@ -1,6 +1,4 @@
 import { Component } from "react";
-import Router from "next/router";
-import Head from "next/head";
 import Link from "next/link";
 import Fade from "react-reveal/Fade";
 
@@ -9,26 +7,15 @@ import Splash from "../components/Splash";
 
 class Home extends Component {
   state = {
-    loading: false,
     load: false
   };
 
   componentDidMount() {
-    Router.onRouteChangeStart = () => {
-      this.setState({ loading: true });
-    };
-    Router.onRouteChangeComplete = () => {
-      this.setState({ loading: false });
-    };
-    Router.onRouteChangeError = () => {
-      this.setState({ loading: false });
-    };
-
     window.addEventListener("load", this.handleLoad);
     window.addEventListener("scroll", this.changeState, true);
   }
 
-  componentWillUnmount() {
+   componentWillUnmount() {
     window.removeEventListener("load", this.handleLoad);
     window.removeEventListener("scroll", this.changeState);
   }
@@ -45,12 +32,10 @@ class Home extends Component {
   };
 
   render() {
-    const { load, loading } = this.state;
+    const { load } = this.state;
+
     return (
-      <Layout loading={loading}>
-        <Head>
-          <title>Luuna | GitHub Match</title>
-        </Head>
+      <Layout>
         <Fade big cascade>
           <Splash load={load} />
         </Fade>

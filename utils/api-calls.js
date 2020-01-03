@@ -2,8 +2,7 @@ import Router from "next/router";
 
 const axios = require("axios");
 
-const SEARCH_BASE_URI = "https://api.github.com/search";
-const USERS_BASE_URI = "https://api.github.com/users";
+import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
 
 const handleError = response => {
   if (response.statusText === "OK") return response;
@@ -28,7 +27,7 @@ const handleError = response => {
 const axiosWithErrorHandling = async url => {
   try {
     const response = await axios.get(url);
-    const handleResponse = handleError(response);    
+    const handleResponse = handleError(response);
     return handleResponse;
   } catch (error) {
     console.error(error);
@@ -37,23 +36,35 @@ const axiosWithErrorHandling = async url => {
 };
 
 const GitHubMatch = {
-  byUser: async (searchValue, page, per_page) => {
+  byUser: async params => {
+    const {
+      usersSearchValue: searchValue,
+      currentPage: page,
+      usersPerPage: per_page
+    } = params;
+
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
-    );    
+      `${SEARCH_BASE_URL}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
+    );
     return response;
   },
 
   getUser: async searchValue => {
     const response = await axiosWithErrorHandling(
-      `${USERS_BASE_URI}/${searchValue}`
+      `${USERS_BASE_URL}/${searchValue}`
     );
     return response.data;
   },
 
-  byRepo: async (searchValue, page, per_page) => {
+  byRepo: async params => {
+    const {
+      reposSearchValue: searchValue,
+      currentPage: page,
+      reposPerPage: per_page
+    } = params;
+
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URI}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
+      `${SEARCH_BASE_URL}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
     );
     return response;
   }

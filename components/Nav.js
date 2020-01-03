@@ -1,17 +1,10 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import Link from "next/link";
 
-class Nav extends Component {
-
+class Nav extends PureComponent {
   state = {
-    navMenuOpen: ""
+    navMenuOpen: false
   };
-
-  componentDidMount() {
-    this.setState({
-      navMenuOpen: false
-    });
-  }
 
   toggle = () => {
     this.setState({
@@ -20,12 +13,7 @@ class Nav extends Component {
   };
 
   render() {
-    const data = [
-      { section: "Inicio", route: "/" },
-      { section: "Usuarios", route: "/users" },
-      { section: "Repositorios", route: "/repositories" }
-    ];
-
+    //console.log('NavProps :', this.props);
     return (
       <nav className="navbar is-fixed-top">
         <div className="container">
@@ -44,9 +32,9 @@ class Nav extends Component {
               data-target="navbarMenuHeroB"
               onClick={this.toggle}
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <span className="is-nice-blue"></span>
+              <span className="is-nice-blue"></span>
+              <span className="is-nice-blue"></span>
             </span>
           </div>
           <div
@@ -60,15 +48,30 @@ class Nav extends Component {
                 this.state.navMenuOpen ? "navbar-end is-active" : "navbar-end"
               }
             >
-              {data.map((props, i) => (
-                <NavbarItem {...props} key={i} />
-              ))}
+              <NavbarItem {...NAV_ITEMS[0]} {...this.props} />
+
+              <div className="navbar-item has-dropdown is-hoverable">
+                <hr className="navbar-divider" />
+                <a className="navbar-link is-nice-blue">Buscar</a>
+                <div className="navbar-dropdown is-right">
+                  <NavbarItem {...NAV_ITEMS[1]} {...this.props} />
+                  <NavbarItem {...NAV_ITEMS[2]} {...this.props} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <style jsx>
           {`
-
+            .nav-logo img {
+              width: 6.5rem;
+              height: auto;
+              cursor: pointer;
+            }
+            @media (max-width: 1023px) {
+              .navbar-menu {
+                height: 100vh;
+              }
             }
           `}
         </style>
@@ -77,10 +80,24 @@ class Nav extends Component {
   }
 }
 
-const NavbarItem = ({ route, section, i }) => (
-  <Link href={route} key={i}>
-    <a className="navbar-item">{section}</a>
+const NavbarItem = ({ route, page, activeRoute }) => (
+  <Link href={route}>
+    <a
+      className={
+        route === activeRoute
+          ? "navbar-item is-nice-blue is-active"
+          : "navbar-item is-nice-blue"
+      }
+    >
+      {page}
+    </a>
   </Link>
 );
+
+const NAV_ITEMS = [
+  { page: "Inicio", route: "/" },
+  { page: "Usuarios GitHub", route: "/users" },
+  { page: "Repositorios GitHub", route: "/repositories" }
+];
 
 export default Nav;

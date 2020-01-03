@@ -1,3 +1,5 @@
+import { bool } from "prop-types";
+
 const Loader = ({ loading }) => {
   return (
     <div
@@ -10,6 +12,10 @@ const Loader = ({ loading }) => {
       <span className="title">Cargando...</span>
     </div>
   );
+};
+
+Loader.propTypes = {
+  loading: bool.isRequired
 };
 
 export default Loader;

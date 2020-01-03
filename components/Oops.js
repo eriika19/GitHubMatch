@@ -5,7 +5,7 @@ const Oops = () => (
       <p className="subtitle">Se produjo un error...</p>
       <div className="content">
         Parece que se perdió la conexión a internet y no existe caché para esta
-        solicitud. Intenta de nuevo con una conexión a internet, porfavor.
+        solicitud. Intenta de nuevo, con una conexión a internet, porfavor.
       </div>
     </article>
   </div>
