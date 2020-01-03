@@ -78,15 +78,16 @@ Agregar PropTypes y API_KEY
 
 ---
 
-## ``Contacto``
-Creado con ❤️ por [Itzel Enciso](https://itzelenciso.com/)
+ >## Contacto
 
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/itzelenciso/)
+Creado con ❤️ por [Itzel Enciso](https://github.com/eriika19)
 
-Sitio web - [@itzelenciso](https://itzelenciso.com/)
+Sitio Web - [itzelenciso.com](https://itzelenciso.com/)
+
+LinkedIn - [@itzelenciso](https://www.linkedin.com/in/itzelenciso/)
 
 Correo - enciso.iq@gmail.com
 
-Link del proyecto: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Link del proyecto: [https://github.com/eriika19/GitHubMatch/tree/master](https://github.com/eriika19/GitHubMatch/tree/master)
 
 ¡Gracias por visitar! 😊
