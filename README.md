@@ -12,8 +12,8 @@
   <h3 align="center">GitHub Match</h3>
 
   <p align="center">
-Aplicación Web Progresiva para todos los que desean econtrar usuarios y repositorios detro de GitHub    <br />
-    <a href="https://github.com/eriika19/GitHubMatch"><strong>Explorar proyecto »</strong></a>
+Aplicación Web Progresiva para todos los que desean encontrar usuarios y repositorios dentro de GitHub    <br />
+    <a href="https://github.com/eriika19/GitHubMatch/tree/master/components"><strong>Explorar proyecto »</strong></a>
     <br />
     <br />
     <a href="https://github-match.now.sh/">Ir a Demo</a>
@@ -41,39 +41,35 @@ Aplicación Web Progresiva para todos los que desean econtrar usuarios y reposit
 
 ## Acerca del proyecto 🚀
 
-Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repositorios y usuarios en GitHub. Se consumión la API de GitHub buscando lograr la mejor experiencias de usuario.
+Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repositorios y usuarios en GitHub. Se consumió la API de GitHub implementando solicitudes Axios y se desarrollo para ser una app _mobile first_ buscando la mejor experiencia de usuario posible.
 
  <br />
 
 #### *_Herramientas_*  🛠️
 
-- Next.js
-- Redux-Saga
-- Axios
-- Bulma
-- Hover.css
-- React-reveal
-- Mobile-first
+- [Next.js](https://github.com/zeit/next.js/)
+- [Redux-Saga](https://github.com/bmealhouse/next-redux-saga)
+- [Axios](https://github.com/axios/axios)
+- [Express](https://expressjs.com/)
+- [Bulma](https://bulma.io/)
+- [React-reveal](https://www.react-reveal.com/)
 - Styled Components
 - Hooks
-- Express
 - Git
-- Eslint
-- Now
-
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Eslint](https://eslint.org/)
 - [Now](https://zeit.co/)
-- [Bulma](https://bulma.io/)
-- [Hover.css](https://ianlunn.github.io/Hover/)
 - [Font Awesome](https://fontawesome.com)
+- [Hover.css](https://ianlunn.github.io/Hover/)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 
  <br />
 
 
 ## Próximos avances
 
-Agregar PropTypes y API_KEY 
+- Completar la asignación de PropTypes en cada componente para con la finalidad de facilitar el mantenimiento de la Aplicación
 
+- Asignar API_KEY para las peticiones a la API de GitHub
  <br />
 
 ---
@@ -88,6 +84,6 @@ LinkedIn - [@itzelenciso](https://www.linkedin.com/in/itzelenciso/)
 
 Correo - enciso.iq@gmail.com
 
-Link del proyecto: [https://github.com/eriika19/GitHubMatch/tree/master](https://github.com/eriika19/GitHubMatch/tree/master)
+Link del proyecto : [https://github.com/eriika19/GitHubMatch/tree/master](https://github.com/eriika19/GitHubMatch/tree/master)
 
 ¡Gracias por visitar! 😊
