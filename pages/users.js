@@ -4,11 +4,8 @@ import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//import GitHubMatch from "../utils/api-calls";
-import {
-  cleanUsersMatch,
-  getUsersMatch,
-} from "../store/actions/users-actions";
+import { cleanUsersMatch, getUsersMatch } from "../store/actions/users-actions";
+
 import Layout from "../components/Layout";
 import Oops from "../components/Oops";
 import UserCard from "../components/UserCard";
@@ -29,47 +26,6 @@ class UsersPage extends PureComponent {
     usersSearchValue: ""
   };
 
-  /*   toggleSearching = () => {
-    this.setState({
-      searching: !this.state.searching
-    });
-  }; */
-
-  /*   cleanPagination = () => {
-    this.setState({
-      usersMatch: "",
-      totalCount: "",
-      currentPage: "",
-      lastPage: ""
-    });
-  }; */
-
-  /*   setInitialPagination = () => {
-    console.log("entro a set inital");
-    console.log(this.props.usersPerPage, this.props.usersTotalResults);
-    //const { usersPerPage, usersTotalResults } = this.props;
-    const currentPage = 1;
-    const lastPage = Math.ceil(
-      this.props.usersTotalResults / this.props.usersPerPage
-    );
-    this.setState({
-      pagination: { currentPage, lastPage }
-    });
-  }; */
-
-  /*   setCurrentPagination = (usersMatch, page) => {
-    this.setState({
-      usersMatch: usersMatch,
-      currentPage: page
-    });
-  }; */
-
-  setCurrentPagination = page => {
-    this.setState({
-      pagination: { ...this.state.pagination, currentPage: page }
-    });
-  };
-
   handleChange = e => {
     if (e.target.value.length < 2) {
       const { dispatch } = this.props;
@@ -80,23 +36,6 @@ class UsersPage extends PureComponent {
     });
   };
 
-  /*   handleData = async data => {
-    const arrPromises = data.items.map(async item => {
-      const userData = await GitHubMatch.getUser(item.login);
-      return userData;
-    });
-    return Promise.all(arrPromises);
-  };
-
-  getData = async (page, perPage) => {
-    const { searchValue } = this.state;
-    const response = await GitHubMatch.byUser(searchValue, page, perPage);
-    const { data } = response;
-    return data;
-  }; */
-
-  //initSearch = async dispatch => await dispatch(getUsersMatch());
-
   handleSubmit = e => {
     e.preventDefault();
     const { usersSearchValue } = this.state;
@@ -105,31 +44,19 @@ class UsersPage extends PureComponent {
     if (usersSearchValue.length > 0) {
       const { dispatch, usersPerPage } = this.props;
       dispatch(getUsersMatch({ usersSearchValue, currentPage: 1, usersPerPage }));
-
-      //get results from usersSearchValue
-      //  dispatch(getUsersMatch({ usersSearchValue, page, usersPerPage })); //get results from usersSearchValue
-
-      /*       const data = await this.getData(page, perPage); //get searchValue results
-      const usersMatch = await this.handleData(data); //handle results to get usersMatch array*/
     }
   };
 
-  handlePagination = async e => {
-    const { usersPerPage } = this.props;
+  handlePagination = e => {
     const page = e.target.name;
-
-    const data = await this.getData(page, UsersPerPage); //get searchValue results
-    const usersMatch = await this.handleData(data); //handle results to get usersMatch array
-
-    this.setCurrentPagination(page);
+    const { usersSearchValue } = this.state;
+    const { dispatch, usersPerPage } = this.props;
+    dispatch(getUsersMatch({ usersSearchValue, currentPage: page, usersPerPage }));
   };
 
   render() {
     console.log("this.props: ", this.props);
-
     const { usersSearchValue } = this.state;
-
-    //const { dispatch } = this.props;
 
     return (
       <Fragment>
@@ -159,18 +86,18 @@ class UsersPage extends PureComponent {
               </form>
               <section id="result">
                 {this.props.usersMatch === ""
-                  ? ``
+                  ? ''
                   : `Se encontró ${this.props.usersTotalResults} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {this.props.usersMatch.length > 0
                     ? this.props.usersMatch.map((props, i) =>
                         props === undefined ? (
-                          <Oops />
+                        <Oops key={i}/>
                         ) : (
                           <UserCard {...props} key={i} />
                         )
                       )
-                    : ``}
+                    : ''}
                 </div>
               </section>
             </section>
@@ -188,9 +115,11 @@ class UsersPage extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    searching: state.userReducer.searching,
-    usersSearchValue: state.userReducer.usersSearchValue,
-    usersMatchArr: state.userReducer.usersMatchArr
+    searching: state.usersReducer.searching,
+    usersMatch: state.usersReducer.usersMatch,
+    usersTotalResults: state.usersReducer.usersTotalResults,
+    pagination: state.usersReducer.pagination,
+    error: state.usersReducer.error
   };
 };
 

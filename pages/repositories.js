@@ -1,111 +1,73 @@
-import { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import GitHubMatch from "../utils/api-calls";
+import { cleanReposMatch, getReposMatch } from "../store/actions/repositories-actions";
 
 import Layout from "../components/Layout";
 import Oops from "../components/Oops";
 import RepoCard from "../components/RepoCard";
 import Pagination from "../components/Pagination";
 
-class RepositoriesPage extends Component {
+class RepositoriesPage extends PureComponent {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    searching: PropTypes.bool.isRequired,
+    reposPerPage: PropTypes.number
+  };
+
+  static defaultProps = {
+    reposPerPage: 20
+  };
+
   state = {
-    searching: false,
-    searchValue: "",
-    matchRepos: "",
-    totalCount: "",
-    currentPage: "",
-    lastPage: "",
-    perPage: 20
-  };
-
-  toggleSearching = () => {
-    this.setState({
-      searching: !this.state.searching
-    });
-  };
-
-  cleanPagination = () => {
-    this.setState({
-      matchRepos: "",
-      totalCount: "",
-      currentPage: "",
-      lastPage: ""
-    });
-  };
-
-  setInitialPagination = data => {
-    const { perPage } = this.state;
-    const totalCount = data.total_count; //total of matches found
-    const lastPage = Math.ceil(totalCount / perPage);
-    this.setState({
-      totalCount: totalCount,
-      lastPage: lastPage
-    });
-  };
-
-  setCurrentPagination = (matchRepos, page) => {
-    this.setState({
-      matchRepos: matchRepos,
-      currentPage: page
-    });
+    reposSearchValue: ""
   };
 
   handleChange = e => {
     if (e.target.value.length < 2) {
-      this.cleanPagination();
+      const { dispatch } = this.props;
+      dispatch(cleanReposMatch());
     }
     this.setState({
-      searchValue: e.target.value
+      reposSearchValue: e.target.value
     });
   };
 
-  getData = async (page, perPage) => {
+  /*   getData = async (page, perPage) => {
     const { searchValue } = this.state;
     const response = await GitHubMatch.byRepo(searchValue, page, perPage);
     const { data } = response;
     return data;
-  };
+  }; */
 
-  handleSubmit = async e => {
-    this.toggleSearching(); //Init searching state
+  handleSubmit = e => {
     e.preventDefault();
-    const { searchValue, perPage } = this.state;
-    //Set intial paramenters
-    const page = 1;
+    const { reposSearchValue } = this.state;
 
     //Verifiy valid searchValue
-    if (searchValue.length > 0) {
-      const data = await this.getData(page, perPage); //get searchValue results
-      const matchRepos = data.items; //handle results to get matchUsers array
-      this.setInitialPagination(data);
-      this.setCurrentPagination(matchRepos, page);
+    if (reposSearchValue.length > 0) {
+      const { dispatch, reposPerPage } = this.props;
+      dispatch(
+        getReposMatch({ reposSearchValue, currentPage: 1, reposPerPage })
+      );
     }
-    this.toggleSearching(); //Finalize searching state
   };
 
-  handlePagination = async e => {
-    const { perPage } = this.state;
-    this.toggleSearching(); //Init searching state
+  handlePagination = e => {
     const page = e.target.name;
-
-    const data = await this.getData(page, perPage); //get searchValue results
-    const matchRepos = data.items;
-
-    this.setCurrentPagination(matchRepos, page);
-    this.toggleSearching(); //Finalize searching state
+    const { reposSearchValue } = this.state;
+    const { dispatch, reposPerPage } = this.props;
+    dispatch(
+      getReposMatch({ reposSearchValue, currentPage: page, reposPerPage })
+    );
   };
 
   render() {
-    const {
-      searching,
-      searchValue,
-      matchRepos,
-      totalCount,
-      currentPage,
-      lastPage
-    } = this.state;
+    console.log("this.props: ", this.props);
+    const { reposSearchValue } = this.state;
 
     return (
       <Fragment>
@@ -115,7 +77,7 @@ class RepositoriesPage extends Component {
               <form className="field" onSubmit={this.handleSubmit}>
                 <div
                   className={
-                    searching
+                    this.props.searching
                       ? "control has-icons-left is-expanded is-loading"
                       : "control has-icons-left is-expanded"
                   }
@@ -125,7 +87,7 @@ class RepositoriesPage extends Component {
                     type="text"
                     placeholder="Buscar repositorio GitHub.."
                     onChange={this.handleChange}
-                    value={searchValue}
+                    value={reposSearchValue}
                   />
                   <FontAwesomeIcon
                     className="icon is-small is-left"
@@ -134,19 +96,19 @@ class RepositoriesPage extends Component {
                 </div>
               </form>
               <section id="results">
-                {matchRepos === ""
-                  ? ``
-                  : `Se encontró ${totalCount} coincidencia(s)`}
+                {this.props.reposMatch === ""
+                  ? ""
+                  : `Se encontró ${this.props.reposTotalResults} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
-                  {matchRepos.length > 0
-                    ? matchRepos.map((props, i) =>
+                  {this.props.reposMatch.length > 0
+                    ? this.props.reposMatch.map((props, i) =>
                         props === undefined ? (
-                          <Oops />
+                          <Oops key={i} />
                         ) : (
                           <RepoCard {...props} key={i} />
                         )
                       )
-                    : ``}
+                    : ""}
                 </div>
               </section>
             </section>
@@ -154,12 +116,23 @@ class RepositoriesPage extends Component {
         </Layout>
         <Pagination
           handlePagination={this.handlePagination}
-          lastPage={lastPage}
-          currentPage={currentPage}
+          lastPage={this.props.pagination.lastPage}
+          currentPage={this.props.pagination.currentPage}
         />
       </Fragment>
     );
   }
 }
 
-export default RepositoriesPage;
+const mapStateToProps = state => {
+  return {
+    searching: state.reposReducer.searching,
+    reposMatch: state.reposReducer.reposMatch,
+    reposTotalResults: state.reposReducer.reposTotalResults,
+    pagination: state.reposReducer.pagination,
+    error: state.reposReducer.error  
+  };
+};
+
+//export default connect(mapStateToProps)(ReposPage);
+export default connect(state => state)(RepositoriesPage);
