@@ -4,7 +4,7 @@ const { withPlugins } = require("next-compose-plugins");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 
-import { BASE_URL } from "./constants/ApiTypes";
+const BASE_URL = "https://api.github.com/";
 
 const nextConfig = {
   workboxOpts: {
