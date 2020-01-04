@@ -4,6 +4,8 @@ const { withPlugins } = require("next-compose-plugins");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 
+import { BASE_URL } from "./constants/ApiTypes";
+
 const nextConfig = {
   workboxOpts: {
     clientsClaim: true,
@@ -22,7 +24,7 @@ const nextConfig = {
         }
       },
       {
-        urlPattern: new RegExp("^https://sheetsu.com/apis/v1.0bu/"),
+        urlPattern: new RegExp(`^${BASE_URL}`),
         handler: "StaleWhileRevalidate",
         options: {
           cacheName: "api-cache",
