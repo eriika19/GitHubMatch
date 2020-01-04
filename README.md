@@ -1,4 +1,3 @@
-<!-- # GitHub Match  -->
 [![Framework](https://img.shields.io/badge/Framework-Next.js-important?style=plastic)](https://travis-ci.org/badges/badgerbadgerbadger) [![Version](https://img.shields.io/badge/Version-v.2.1.1b-blueviolet?style=plastic)](https://rubygems.org/gems/badgerbadgerbadger) [![License](https://img.shields.io/:license-ISC-blue.svg?style=plastic)](http://badges.isc-license.org)
 
 ---
@@ -34,7 +33,7 @@ Aplicación Web Progresiva para todos los que desean encontrar usuarios y reposi
 
 - [Acerca del Proyecto](#acerca-del-proyecto)
   - [Herramientas](#_herramientas_)
-  - [Próximos avances](#próximos-avances)
+  - [Siguientes alcances](#siguientes-alcances)
 - [Contacto](#contacto)
 
  <br />
@@ -65,7 +64,7 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
  <br />
 
 
-## Próximos avances
+## Siguientes alcances
 
 - Completar la asignación de PropTypes en cada componente para con la finalidad de facilitar el mantenimiento de la Aplicación
 
