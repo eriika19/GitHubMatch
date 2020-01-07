@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "url": "/_next/static/chunks/commons.ce47f9a9498f1ae46ce4.js",
-    "revision": "a33ee8aeb8e29313429d"
+    "url": "/_next/static/chunks/commons.feb56bb6b6947992d0f4.js",
+    "revision": "f0039bbd2d2bee3aebbe"
   },
   {
     "url": "/_next/static/chunks/styles.b314d5a56ab2e9ea3b68.js",
@@ -24,24 +24,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\TSGq44xXy-Nhjfaln6B5K\\pages\\_app.js",
-    "revision": "ce3076b576bb9ff6e013"
+    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\_app.js",
+    "revision": "82713f600b636983b217"
   },
   {
-    "url": "/_next/static\\TSGq44xXy-Nhjfaln6B5K\\pages\\_error.js",
-    "revision": "32c1148b2741295451ff"
+    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\_error.js",
+    "revision": "b243c4c2ff789b488ee7"
   },
   {
-    "url": "/_next/static\\TSGq44xXy-Nhjfaln6B5K\\pages\\index.js",
-    "revision": "984037f8634f0587c38c"
+    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\index.js",
+    "revision": "c765003a1d290012a62a"
   },
   {
-    "url": "/_next/static\\TSGq44xXy-Nhjfaln6B5K\\pages\\repositories.js",
-    "revision": "8203df2995a66077eb63"
+    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\repositories.js",
+    "revision": "b340f448b0a9b0b96f3e"
   },
   {
-    "url": "/_next/static\\TSGq44xXy-Nhjfaln6B5K\\pages\\users.js",
-    "revision": "cc90a91f7b22d4b18143"
+    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\users.js",
+    "revision": "ec43b0350478b8fb6b26"
   }
 ];
 
@@ -77,6 +77,6 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerRoute(/^https?.*/, new workbox.strategies.NetworkFirst({ "cacheName":"OfflineCache", plugins: [new workbox.expiration.Plugin({ maxEntries: 200, purgeOnQuotaError: false })] }), 'GET');
-workbox.routing.registerRoute(/^https:\/\/sheetsu.com\/apis\/v1.0bu\//, new workbox.strategies.StaleWhileRevalidate({ "cacheName":"api-cache", plugins: [new workbox.cacheableResponse.Plugin({ statuses: [ 0, 200 ], headers: { 'x-test': 'true' } })] }), 'GET');
+workbox.routing.registerRoute(/^https:\/\/api.github.com\//, new workbox.strategies.StaleWhileRevalidate({ "cacheName":"api-cache", plugins: [new workbox.cacheableResponse.Plugin({ statuses: [ 0, 200 ], headers: { 'x-test': 'true' } })] }), 'GET');
 workbox.routing.registerRoute(/.*\.(?:png|jpg|jpeg|svg|gif)/, new workbox.strategies.CacheFirst(), 'GET');
 workbox.routing.registerRoute(/(results | question)/, new workbox.strategies.NetworkFirst({ plugins: [new workbox.cacheableResponse.Plugin({ statuses: [ 0, 200 ], headers: { 'x-test': 'true' } })] }), 'GET');
