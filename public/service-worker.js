@@ -24,24 +24,24 @@ self.__precacheManifest = [
     "revision": "71726f334912f74c262a"
   },
   {
-    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\_app.js",
-    "revision": "82713f600b636983b217"
+    "url": "/_next/static\\y3OAF3iEN_WsPvYsmsZIo\\pages\\_app.js",
+    "revision": "081838ffb09fff7059e7"
   },
   {
-    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\_error.js",
-    "revision": "b243c4c2ff789b488ee7"
+    "url": "/_next/static\\y3OAF3iEN_WsPvYsmsZIo\\pages\\_error.js",
+    "revision": "e787c69f4966e0ee7c3c"
   },
   {
-    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\index.js",
-    "revision": "c765003a1d290012a62a"
+    "url": "/_next/static\\y3OAF3iEN_WsPvYsmsZIo\\pages\\index.js",
+    "revision": "1d58ff12ec3059e026cf"
   },
   {
-    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\repositories.js",
-    "revision": "b340f448b0a9b0b96f3e"
+    "url": "/_next/static\\y3OAF3iEN_WsPvYsmsZIo\\pages\\repositories.js",
+    "revision": "30b6d4ad241fff69466e"
   },
   {
-    "url": "/_next/static\\0_DYlHieeZqvhdzlriNgs\\pages\\users.js",
-    "revision": "ec43b0350478b8fb6b26"
+    "url": "/_next/static\\y3OAF3iEN_WsPvYsmsZIo\\pages\\users.js",
+    "revision": "7cf6aefc652f86d0ca5f"
   }
 ];
 

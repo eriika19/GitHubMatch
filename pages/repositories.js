@@ -95,7 +95,7 @@ class RepositoriesPage extends PureComponent {
                   : `Se encontró ${this.props.reposTotalResults} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {this.props.reposMatch.length > 0
-                    ? this.props.reposMatch.map((props, i) =>
+                    ? this.props.reposMatch.map(props =>
                         props === undefined ? (
                           <Oops key={shortid.generate()} />
                         ) : (
