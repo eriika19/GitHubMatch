@@ -7,6 +7,7 @@ const normalizeUrl = require("normalize-url");
 const cacheableResponse = require("cacheable-response");
 
 const dev = process.env.NODE_ENV !== "production";
+const port = process.env.PORT || 3000;
 
 const app = next({ dev: dev, dir: "." });
 
@@ -31,7 +32,7 @@ const _getSSRCacheKey = req => {
 };
 
 const cacheManager = cacheableResponse({
-  ttl: 1000 * 60 * 60, // 1hour
+  ttl: 1000 * 60 * 60, // 1 hour
   get: async ({ req, res, pagePath, queryParams }) => {
     try {
       return {
@@ -62,7 +63,7 @@ function clearCompleteCache(res, req) {
 
 function clearCacheForRequestUrl(req, res) {
   let key = _getSSRCacheKey(req);
-  console.log(key);
+  console.log("key: ", key);
   cacheStore.delete(key);
   res.status(200);
   res.send({
@@ -113,9 +114,9 @@ app
       }
     });
 
-    server.listen(3000, err => {
+    server.listen(port, err => {
       if (err) throw err;
-      console.log("> Ready on http://localhost:3000");
+      console.log(`> Ready on http://localhost:${port}`);
     });
   })
   .catch(ex => {

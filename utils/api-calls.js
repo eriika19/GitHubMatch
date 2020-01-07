@@ -1,8 +1,11 @@
-import Router from "next/router";
-
 const axios = require("axios");
 
+import Router from "next/router";
+
 import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
+import { API_KEY } from "./config"
+
+const headers = { Authorization: `Token ${API_KEY}` };
 
 const handleError = response => {
   if (response.statusText === "OK") return response;
@@ -26,8 +29,10 @@ const handleError = response => {
 
 const axiosWithErrorHandling = async url => {
   try {
-    const response = await axios.get(url);
-    const handleResponse = handleError(response);
+    const response = await axios.get(url, {
+      headers
+    });    
+    const handleResponse = handleError(response);    
     return handleResponse;
   } catch (error) {
     console.error(error);
@@ -37,14 +42,10 @@ const axiosWithErrorHandling = async url => {
 
 const GitHubMatch = {
   byUser: async params => {
-    const {
-      usersSearchValue: searchValue,
-      currentPage: page,
-      usersPerPage: per_page
-    } = params;
+    const { usersSearchValue, currentPage, usersPerPage } = params;
 
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URL}/users?q=${searchValue}&page=${page}&per_page=${per_page}`
+      `${SEARCH_BASE_URL}/users?q=${usersSearchValue}&page=${currentPage}&per_page=${usersPerPage}`
     );
     return response;
   },
@@ -57,17 +58,21 @@ const GitHubMatch = {
   },
 
   byRepo: async params => {
-    const {
-      reposSearchValue: searchValue,
-      currentPage: page,
-      reposPerPage: per_page
-    } = params;
+    const { reposSearchValue, currentPage, reposPerPage } = params;
 
     const response = await axiosWithErrorHandling(
-      `${SEARCH_BASE_URL}/repositories?q=${searchValue}&page=${page}&per_page=${per_page}`
+      `${SEARCH_BASE_URL}/repositories?q=${reposSearchValue}&page=${currentPage}&per_page=${reposPerPage}`
     );
     return response;
   }
 };
+
+/* export const userLogOut = () => {
+  return fetch({
+    method: "get",
+    useToken: true,
+    url: "/api/user/logout"
+  });
+}; */
 
 export default GitHubMatch;
