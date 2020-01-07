@@ -70,7 +70,6 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
 
 - Completar la asignación de PropTypes en cada componente para con la finalidad de facilitar el mantenimiento de la Aplicación
 
-- Asignar API_KEY para las peticiones a la API de GitHub
  <br />
 
 ---
