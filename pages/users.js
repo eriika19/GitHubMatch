@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import shortid from "shortid";
 import Fade from "react-reveal/Fade";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -92,9 +93,9 @@ class UsersPage extends PureComponent {
                   {this.props.usersMatch.length > 0
                     ? this.props.usersMatch.map((props, i) =>
                         props === undefined ? (
-                        <Oops key={i}/>
+                        <Oops key={shortid.generate()}/>
                         ) : (
-                          <UserCard {...props} key={i} />
+                          <UserCard {...props} key={shortid.generate()} />
                         )
                       )
                     : ''}

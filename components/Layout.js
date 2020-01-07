@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { useDispatch } from "react-redux";
-import { node } from "prop-types";
+import { connect } from "react-redux";
+import { node, func } from "prop-types";
 import Router from "next/router";
 
 import { cleanUsersMatch } from "../store/actions/users-actions";
@@ -9,7 +9,8 @@ import Loader from "./Loader";
 
 class Layout extends Component {
   static propTypes = {
-    children: node.isRequired
+    children: node.isRequired,
+    dispatch: func.isRequired
   };
 
   state = {
@@ -18,7 +19,7 @@ class Layout extends Component {
 
   componentDidMount() {
     Router.onRouteChangeStart = () => {
-      const dispatch = useDispatch();
+      const { dispatch } = this.props;
       dispatch(cleanUsersMatch());
       dispatch(cleanReposMatch());
       this.setState({ loading: true });
@@ -132,7 +133,7 @@ class Layout extends Component {
                 padding: 1.2rem;
                 margin-left: 1rem;
                 margin-right: 1rem;
-                font-size: .9rem;
+                font-size: 0.9rem;
                 color: #777;
               }
             }
@@ -143,4 +144,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default connect()(Layout);
