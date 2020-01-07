@@ -66,7 +66,7 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
  <br />
 
 
-## Siguientes alcances
+## Próximos alcances
 
 - Completar la asignación de PropTypes en cada componente para con la finalidad de facilitar el mantenimiento de la Aplicación
 
