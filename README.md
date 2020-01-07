@@ -1,4 +1,4 @@
-[![Framework](https://img.shields.io/badge/Framework-Next.js-important?style=plastic)](https://github.com/zeit/next.js/) [![Version](https://img.shields.io/badge/version-v.2.1.1b-green?style=plastic)](https://rubygems.org/gems/badgerbadgerbadger) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-blueviolet?style=plastic)](https://github.com/prettier/prettier) [![styled guide](https://img.shields.io/badge/style_guide-Airbnb-violet?style=plastic)](https://github.com/airbnb/javascript) [![License](https://img.shields.io/:license-ISC-blue.svg?style=plastic)](http://badges.isc-license.org)
+[![Framework](https://img.shields.io/badge/Framework-Next.js-important?style=plastic)](https://github.com/zeit/next.js/) [![Version](https://img.shields.io/badge/version-v.2.2.1-green?style=plastic)](https://rubygems.org/gems/badgerbadgerbadger) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-blueviolet?style=plastic)](https://github.com/prettier/prettier) [![styled guide](https://img.shields.io/badge/style_guide-Airbnb-violet?style=plastic)](https://github.com/airbnb/javascript) [![License](https://img.shields.io/:license-ISC-blue.svg?style=plastic)](http://badges.isc-license.org)
 
 ---
 
@@ -70,7 +70,6 @@ Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repo
 
 - Completar la asignación de PropTypes en cada componente para con la finalidad de facilitar el mantenimiento de la Aplicación
 
-- Asignar API_KEY para las peticiones a la API de GitHub
  <br />
 
 ---

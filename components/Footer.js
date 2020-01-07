@@ -8,7 +8,7 @@ const Footer = () => (
         <a href="https://itzelenciso.com"> Itzel Enciso</a> .
       </p>
       <p>
-        This website is deployed with Now&#9650; and the source code is in
+        This website is deployed with Now&#9650; and the source code is hosted in
         <a href="https://github.com/eriika19/GitHubMatch"> GitHub</a> . ¡Enjoy!
         <span className="icon hvr-icon-spin">
           <i>
