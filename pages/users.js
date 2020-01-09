@@ -91,7 +91,7 @@ class UsersPage extends PureComponent {
                   : `Se encontró ${this.props.usersTotalResults} coincidencia(s)`}
                 <div id="results" className="container has-margin-top">
                   {this.props.usersMatch.length > 0
-                    ? this.props.usersMatch.map((props, i) =>
+                    ? this.props.usersMatch.map(props =>
                         props === undefined ? (
                         <Oops key={shortid.generate()}/>
                         ) : (
