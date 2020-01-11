@@ -85,6 +85,6 @@ LinkedIn - [@itzelenciso](https://www.linkedin.com/in/itzelenciso/)
 
 Correo Gmail - [enciso.iq@gmail.com](<mailto:enciso.iq@gmail.com?subject=Reclutamiento&body=¡Buen día! el motivo de contacto es:>)
 
-Link del proyecto : [https://github.com/eriika19/GitHubMatch/tree/master](https://github.com/eriika19/GitHubMatch/tree/master)
+
 
 ¡Gracias por visitar! 😊
