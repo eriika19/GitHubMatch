@@ -1,4 +1,8 @@
+import React, { useState } from "react";
+import { useDispatch, useStore } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { updateReposList } from "../store/actions/repositories-list-actions";
 
 const getDaysAgo = date => {
   const updateAt = new Date(date);
@@ -10,9 +14,17 @@ const getDaysAgo = date => {
   return daysAgo;
 };
 
+const getIndex = id => {
+  const store = useStore();
+  const { reposList } = store.getState().reposListReducer;
+  const index = reposList.findIndex(repo => repo.id === id);
+  return index;
+};
+
 const RepoCard = props => {
   const {
     description,
+    id,
     forks_count,
     homepage,
     html_url,
@@ -20,11 +32,14 @@ const RepoCard = props => {
     owner,
     updated_at
   } = props;
+  const item = props;
 
+  const index = getIndex(id);
+  const [addedItem, setAddedItem] = useState(index < 0 ? false : true);
   const daysAgo = getDaysAgo(updated_at);
-
+  const dispatch = useDispatch();
   return (
-    <div className="card">
+    <div className="card" id={id}>
       <article className="media">
         <figure className="media-left">
           <p className="image is-96x96 is-img-card">
@@ -82,6 +97,23 @@ const RepoCard = props => {
               )}
             </div>
           </div>
+        </div>
+        <div className="media-right icon">
+          <span
+            className="icon hvr-icon-pulse-shrink"
+            onClick={() => {
+              dispatch(updateReposList({ item, index }));
+              setAddedItem(!addedItem);
+            }}
+          >
+            {addedItem ? `Eliminar de lista ` : `Agregar a lista `}
+            <i>
+              <FontAwesomeIcon
+                className="fas fa-lg hvr-icon"
+                icon={addedItem ? "minus-circle" : "plus-circle"}
+              />
+            </i>
+          </span>
         </div>
       </article>
     </div>

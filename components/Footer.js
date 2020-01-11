@@ -4,7 +4,7 @@ const Footer = () => (
   <footer className="footer">
     <div className="content has-text-centered">
       <p>
-        <strong>GitHub Match</strong> created with &#10084; by
+        <strong>GitHub Match</strong> was created with &#10084; by
         <a href="https://itzelenciso.com"> Itzel Enciso</a> .
       </p>
       <p>

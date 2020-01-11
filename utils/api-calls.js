@@ -3,7 +3,7 @@ const axios = require("axios");
 import Router from "next/router";
 
 import { SEARCH_BASE_URL, USERS_BASE_URL } from "../constants/ApiTypes";
-import { API_KEY } from "./config"
+import { API_KEY } from "./config";
 
 const headers = { Authorization: `Token ${API_KEY}` };
 
@@ -31,8 +31,8 @@ const axiosWithErrorHandling = async url => {
   try {
     const response = await axios.get(url, {
       headers
-    });    
-    const handleResponse = handleError(response);    
+    });
+    const handleResponse = handleError(response);
     return handleResponse;
   } catch (error) {
     console.error(error);
@@ -63,16 +63,9 @@ const GitHubMatch = {
     const response = await axiosWithErrorHandling(
       `${SEARCH_BASE_URL}/repositories?q=${reposSearchValue}&page=${currentPage}&per_page=${reposPerPage}`
     );
+
     return response;
   }
 };
-
-/* export const userLogOut = () => {
-  return fetch({
-    method: "get",
-    useToken: true,
-    url: "/api/user/logout"
-  });
-}; */
 
 export default GitHubMatch;

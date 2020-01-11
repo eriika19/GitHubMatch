@@ -49,13 +49,14 @@ class Nav extends PureComponent {
               }
             >
               <NavbarItem {...NAV_ITEMS[0]} {...this.props} />
+              <NavbarItem {...NAV_ITEMS[1]} {...this.props} />
 
               <div className="navbar-item has-dropdown is-hoverable">
                 <hr className="navbar-divider" />
                 <a className="navbar-link is-nice-blue">Buscar</a>
                 <div className="navbar-dropdown is-boxed is-right">
-                  <NavbarItem {...NAV_ITEMS[1]} {...this.props} />
                   <NavbarItem {...NAV_ITEMS[2]} {...this.props} />
+                  <NavbarItem {...NAV_ITEMS[3]} {...this.props} />
                 </div>
               </div>
             </div>
@@ -96,6 +97,7 @@ const NavbarItem = ({ route, page, activeRoute }) => (
 
 const NAV_ITEMS = [
   { page: "Inicio", route: "/" },
+  { page: "Listas", route: "/lists" },
   { page: "Usuarios GitHub", route: "/users" },
   { page: "Repositorios GitHub", route: "/repositories" }
 ];

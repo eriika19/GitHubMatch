@@ -49,6 +49,9 @@ class Layout extends Component {
             .view {
               min-height: 100vh;
             }
+            .hide {
+              display: none;
+            }
             .content-container {
               display: flex;
               align-items: center;
@@ -121,6 +124,17 @@ class Layout extends Component {
             }
             p.title.is-not-spaced {
               margin-bottom: 0.25rem;
+            }
+            .tabs.is-toggle li.is-active a {
+              background: #5b7bb2;
+              border-color: #5b7bb2;
+            }
+            .icon.hvr-icon-pulse-shrink {
+              margin-top: 1.2rem;
+              min-width: 17.5rem;
+            }
+            .hvr-icon-pulse-shrink .hvr-icon {
+              width: 1.1rem;
             }
             @media (max-width: 1023px) {
               .section {

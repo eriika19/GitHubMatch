@@ -7,9 +7,6 @@ const Splash = ({ load }) => (
     </figure>
     <style jsx>
       {`
-        .hide {
-          display: none;
-        }
         .splash {
           padding-top: 15vh;
         }
