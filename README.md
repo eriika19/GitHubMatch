@@ -40,7 +40,7 @@ Aplicación Web Progresiva para todos los que desean encontrar y crear listas co
 
 ## Acerca del proyecto 🚀
 
-Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repositorios y usuarios en GitHub. Se consumió la API de GitHub implementando solicitudes Axios,añadiendo la configuración necesaria para obtener resultados satisfactorios en todas las auditorías de Lighthouse; con el fin de desarrollar una app _mobile first_ que propocione la mejor experiencia de usuario posible.
+Esta aplicación se desarrollo para facilitar la búsqueda y navegación de repositorios y usuarios en GitHub. Se consumió la API de GitHub implementando solicitudes Axios; añadiendo la configuración necesaria para obtener resultados satisfactorios en todas las auditorías de Lighthouse; con el fin de desarrollar una app _mobile first_ que propocione la mejor experiencia de usuario posible.
 
  <br />
 
