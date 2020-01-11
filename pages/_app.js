@@ -13,9 +13,9 @@ import "bulma-pageloader/dist/css/bulma-pageloader.min.css";
 // config for fontawesome
 config.autoAddCss = false;
 //library from fontawesome
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faPlusCircle, faUserPlus, faMinusCircle, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { faGithubAlt } from "@fortawesome/free-brands-svg-icons";
-library.add(faSearch, faGithubAlt);
+library.add(faSearch, faGithubAlt, faPlusCircle, faUserPlus, faMinusCircle, faUserMinus);
 
 //config for _app and title 
 import { RouterTitle } from "../constants/RouterTypes";
