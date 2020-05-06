@@ -61,23 +61,23 @@ const nextConfig = {
       fs: "empty"
     };
 
-    if (!isServer) {
-      config.module.rules
-        .find(({ test }) => test.test("style.css"))
-        .use.push({
-          loader: "css-purify-webpack-loader",
-          options: {
-            includes: ["./pages/*.js", "./components/*.js"]
-          }
-        });
-    }
+    // if (!isServer) {
+    //   config.module.rules
+    //     .find(({ test }) => test.test("style.css"))
+    //     .use.push({
+    //       loader: "css-purify-webpack-loader",
+    //       options: {
+    //         includes: ["./pages/*.js", "./components/*.js"]
+    //       }
+    //     });
+    // }
 
     const PUBLIC_PATH = "..";
 
     config.plugins.push(
       new WebpackPwaManifest({
         filename: "static/manifest.json",
-        name: "Luuna | GitHub Match",
+        name: "GitHub Match",
         short_name: "GitHub Match",
         description: "Web App to find GitHub repositories and users.",
         background_color: "#FFF",

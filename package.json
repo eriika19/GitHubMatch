@@ -1,5 +1,5 @@
 {
-  "name": "github-match",
+  "name": "git-hub-match",
   "version": "1.10.2",
   "description": "Web App to find GitHub repositories and users.",
   "main": ".",
@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node server.js",
     "build": "next build",
-    "start": "SET NODE_ENV=production && node server.js"
+    "start": "SET NODE_ENV=production && node server.js",
+    "start2": "NODE_ENV=production && node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/eriika19/GitHubMatch/issues"
   },
-  "homepage": "https://github-match.now.sh",
+  "homepage": "https://git-hub-match.now.sh",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-brands-svg-icons": "^5.12.0",

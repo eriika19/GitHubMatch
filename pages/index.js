@@ -21,7 +21,7 @@ class Home extends Component {
   }
 
   handleLoad = () => {
-    // Manejo de Splash con logo de Luuna
+    // Manejo de Splash con logo de GitHub Match
     setTimeout(this.changeState, 700);
   };
 
