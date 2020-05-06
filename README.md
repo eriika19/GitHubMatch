@@ -15,7 +15,7 @@ Aplicación Web Progresiva para todos los que desean encontrar y crear listas co
     <a href="https://github.com/eriika19/GitHubMatch/tree/master/components"><strong>Explorar proyecto »</strong></a>
     <br />
     <br />
-    <a href="https://github-match.now.sh/">Ir a Demo</a>
+    <a href="https://git-hub-match.now.sh/">Ir a Demo</a>
     ·
     <a href="https://github.com/eriika19/GitHubMatch/issues">Reportar Problema</a>
     ·
